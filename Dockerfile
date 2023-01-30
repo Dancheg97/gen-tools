@@ -3,6 +3,8 @@ FROM archlinux/archlinux:base-devel
 LABEL maintainer="Dancheg97 <dangdancheg@gmail.com>"
 
 RUN pacman -Syu --needed --noconfirm git go
+ENV PATH="${PATH}:/home/makepkg/go/bin"
+
 RUN chmod a+rwx -R /var/cache/pacman/pkg
 ARG user=makepkg
 RUN useradd --system --create-home $user \

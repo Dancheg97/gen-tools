@@ -6,7 +6,7 @@
 
 [![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-red.svg)](https://gitea.dancheg97.ru/templates/golden-go/src/branch/main/LICENSE)
 [![Generic badge](https://img.shields.io/badge/GITEA-REPO-orange.svg)](https://gitea.dancheg97.ru/templates/golden-go)
-[![Generic badge](https://img.shields.io/badge/DOCKER-REGISTRY-blue.svg)](https://gitea.dancheg97.ru/templates/-/packages/container/golden-go/latest)
+[![Generic badge](https://img.shields.io/badge/DOCKER-CONTAINER-blue.svg)](https://gitea.dancheg97.ru/templates/-/packages/container/golden-go/latest)
 [![Build Status](https://drone.dancheg97.ru/api/badges/templates/golden-go/status.svg)](https://drone.dancheg97.ru/templates/golden-go)
 
 Docker image with collection of formatters, linters and generators that can be
@@ -40,4 +40,10 @@ docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:
 
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest buf --help
+```
+
+- [sqlc](https://docs.sqlc.dev/en/stable) - tool for helping with protocol buffers and gRPC
+
+```sh
+docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest sqlc --help
 ```

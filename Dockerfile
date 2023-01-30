@@ -24,3 +24,4 @@ RUN yay -Sy --noconfirm golangci-lint
 RUN yay -Sy --noconfirm protoc-gen-go
 RUN yay -Sy --noconfirm protoc-gen-go-grpc
 RUN yay -Sy --noconfirm buf
+RUN yay -Sy --noconfirm sqlc

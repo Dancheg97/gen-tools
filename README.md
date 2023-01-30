@@ -14,6 +14,14 @@ used in CI pipelines and for local development.
 
 ---
 
+You can pull docker container via command:
+
+```sh
+docker pull gitea.dancheg97.ru/templates/golden-go:latest
+```
+
+---
+
 Collection includes following tooling:
 
 - `gofumpt` - tool for formatting go code
@@ -39,4 +47,3 @@ docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest buf --help
 ```
-

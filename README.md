@@ -24,25 +24,19 @@ docker pull gitea.dancheg97.ru/templates/golden-go:latest
 
 Collection includes following tooling:
 
-- `gofumpt` - tool for formatting go code
+- [gofumpt](https://github.com/mvdan/gofumpt) - tool for formatting go code
 
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest gofumpt --help
 ```
 
-- golanglint-ci
+- [golanglint-ci](https://golangci-lint.run/) - tool for linting go code
 
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest golanglint-ci --help
 ```
 
-- protobuf
-
-```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest protoc-gen-go --help
-```
-
-- buf
+- [buf](https://docs.buf.build/introduction) - tool for helping with protocol buffers and gRPC
 
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest buf --help

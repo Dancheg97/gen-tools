@@ -10,7 +10,9 @@
 [![Build Status](https://drone.dancheg97.ru/api/badges/templates/golden-go/status.svg)](https://drone.dancheg97.ru/templates/golden-go)
 
 Docker image with collection of formatters, linters and generators that can be
-used in CI pipelines and for local development.
+used in CI pipelines and local environment.
+
+[Makefile](Makefile) example, providing examples of usage.
 
 ---
 
@@ -30,20 +32,26 @@ Collection includes following tooling:
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest gofumpt --help
 ```
 
-- [golanglint-ci](https://golangci-lint.run/) - tool for linting go code
+- [golanglint-ci](https://golangci-lint.run/) - tool for linting go code, [config template](.golangci.yml)
 
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest golanglint-ci --help
 ```
 
-- [buf](https://docs.buf.build/introduction) - tool for helping with protocol buffers and gRPC
+- [buf](https://docs.buf.build/introduction) - tool for helping with protocol buffers and gRPC, [buf example](buf.yaml), [buf gen example](buf.gen.yaml)
 
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest buf --help
 ```
 
-- [sqlc](https://docs.sqlc.dev/en/stable) - tool for helping with protocol buffers and gRPC
+- [sqlc](https://docs.sqlc.dev/en/stable) - tool for generating type-safe go code from sql queries, [sqlc.sql example](sqlc.sql), config - [sqlc.yaml example](sqlc.yaml)
 
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest sqlc --help
+```
+
+- [go-swag](https://github.com/swaggo/swag) - tool for generating `swagger.yaml` from code annotations.
+
+```sh
+docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/golden-go:latest swag --help
 ```

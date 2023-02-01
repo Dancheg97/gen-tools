@@ -1,11 +1,11 @@
 package templates
 
-const SqlSql = `-- name: SelectSomething :one
+const SqlcSql = `-- name: SelectSomething :one
 
 SELECT * FROM something WHERE id = $1;
 `
 
-const SqlYaml = `version: 1
+const SqlcYaml = `version: 1
 packages:
   - path: "gen/sqlc"
     name: "sqlc"

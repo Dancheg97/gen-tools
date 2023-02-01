@@ -1,6 +1,6 @@
 package templates
 
-const ProducerGo = `package producer
+const NatsProducerGo = `package nats
 
 import (
 	"github.com/nats-io/nats.go"
@@ -44,7 +44,7 @@ func processErr(err error, onErr ...func(err error)) {
 }
 `
 
-const ConsumerGo = `package consumer
+const NatsConsumerGo = `package nats
 
 import (
 	"github.com/nats-io/nats.go"

@@ -107,6 +107,10 @@ func setLogFormat() {
 			FullTimestamp: true,
 		})
 	default:
-		logrus.SetFormatter(&logrus.JSONFormatter{})
+		logrus.SetFormatter(&logrus.TextFormatter{
+			ForceColors:   true,
+			DisableQuote:  true,
+			FullTimestamp: true,
+		})
 	}
 }

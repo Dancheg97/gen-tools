@@ -9,17 +9,45 @@
 [![Generic badge](https://img.shields.io/badge/DOCKER-CONTAINER-blue.svg)](https://gitea.dancheg97.ru/templates/-/packages/container/go-tools/latest)
 [![Build Status](https://drone.dancheg97.ru/api/badges/templates/go-tools/status.svg)](https://drone.dancheg97.ru/templates/go-tools)
 
-Project goal is to simplify process of
+🧰 CLI Tool for generating templates of go code for interaction with different
+infrastructural elements.
 
----
+📃 Options you can specify under 'gen' command:
 
-You can pull docker container via command:
+This tool allows to generate prepared go code for interaction with following
+infrastructure components (go-tools gen [options]):
 
-```sh
+- **cli** - includes cobra and viper
+- **drone** - includes drone template for CI-CD
+- **lint** - includes golanglint-ci linter for go code
+- **grpc** - includes proto and buf files for generation
+- **docker** - includes 2 stage dockerfile and compose for ease of development
+- **pg** - includes pgx module in porstgres, sqlc for generation and goose for migrations
+- **redis** - includes redis template
+- **nats** - includes consumer and producer nats template
+- **license** - adds GPLv3 license to project
+
+### Installation:
+
+- docker
+
+```
 docker pull gitea.dancheg97.ru/templates/go-tools:latest
 ```
 
----
+- go
+
+```
+go install gitea.dancheg97.ru/templates/go-tools@latest
+```
+
+### Examples:
+
+- [go-tools](README.md) - tool for generating go project templates
+
+```sh
+go-tools gen cli lint docker makefile gpl
+```
 
 Collection includes following tooling:
 

@@ -51,6 +51,7 @@ func Gen(cmd *cobra.Command, args []string) {
 		switch arg {
 		case "cli":
 			errs = append(errs, os.WriteFile("main.go", []byte(templates.CliMainGo), 0600))
+			errs = append(errs, os.MkdirAll("cmd", os.ModePerm))
 			errs = append(errs, os.WriteFile("cmd/flags.go", []byte(templates.CliFlagsGo), 0600))
 			errs = append(errs, os.WriteFile("cmd/run.go", []byte(templates.CliRunGo), 0600))
 			errs = append(errs, os.WriteFile("cmd/root.go", []byte(templates.CliRootGo), 0600))
@@ -67,11 +68,15 @@ func Gen(cmd *cobra.Command, args []string) {
 		case "pg":
 			errs = append(errs, os.WriteFile("sqlc.yaml", []byte(templates.SqlcYaml), 0600))
 			errs = append(errs, os.WriteFile("sqlc.sql", []byte(templates.SqlcSql), 0600))
+			errs = append(errs, os.MkdirAll("migrations", os.ModePerm))
 			errs = append(errs, os.WriteFile("migrations/0001_ini.sql", []byte(templates.MigrationSql), 0600))
+			errs = append(errs, os.MkdirAll("postgres", os.ModePerm))
 			errs = append(errs, os.WriteFile("postgres/postgres.go", []byte(templates.PostgresGo), 0600))
 		case "redis":
+			errs = append(errs, os.MkdirAll("redis", os.ModePerm))
 			errs = append(errs, os.WriteFile("redis/redis.go", []byte(templates.RedisGo), 0600))
 		case "nats":
+			errs = append(errs, os.MkdirAll("nats", os.ModePerm))
 			errs = append(errs, os.WriteFile("nats/consumer.go", []byte(templates.NatsConsumerGo), 0600))
 			errs = append(errs, os.WriteFile("nats/producer.go", []byte(templates.NatsProducerGo), 0600))
 		case "make":
@@ -84,6 +89,7 @@ func Gen(cmd *cobra.Command, args []string) {
 			logrus.Error("unknown arguement: ", arg)
 		}
 	}
+
 	for _, err := range errs {
 		if err != nil {
 			logrus.Error(err)

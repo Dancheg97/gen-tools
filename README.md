@@ -10,7 +10,7 @@
 [![Build Status](https://drone.dancheg97.ru/api/badges/templates/go-tools/status.svg)](https://drone.dancheg97.ru/templates/go-tools)
 
 🧰 CLI Tool for generating templates of go code for interaction with different
-infrastructural elements.
+elements of infrastructure.
 
 📃 Options you can specify under 'gen' command:
 
@@ -48,8 +48,6 @@ go install gitea.dancheg97.ru/templates/go-tools@latest
 ```sh
 go-tools gen cli lint docker makefile gpl
 ```
-
-Collection includes following tooling:
 
 - [gofumpt](https://github.com/mvdan/gofumpt) - tool for formatting go code
 

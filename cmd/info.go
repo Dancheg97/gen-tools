@@ -10,21 +10,8 @@ func init() {
 
 var infoCmd = &cobra.Command{
 	Use:   "info",
-	Short: "🤖 Generate template components",
+	Short: "📝 Get information about specific arguements.",
 	Run:   Info,
-	Long: `🤖 Generate template components
-
-This tool allows to generate prepared go code for interaction with following
-infrastructure components (go-tools gen cli drone lint nats):
-
-- cobra&viper
-- drone
-- golang-ci lint
-- gRPC&buf
-- docker&compose
-- pgx&sqlc
-- redis
-- nats`,
 }
 
 func Info(cmd *cobra.Command, args []string) {

@@ -38,7 +38,6 @@ infrastructure components (go-tools gen ...):
 - redis
 - nats
 - license
-
 `,
 }
 

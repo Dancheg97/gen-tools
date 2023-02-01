@@ -229,3 +229,6 @@ issues:
         - noctx
         - wrapcheck
         - errcheck
+    - path: "license.go"
+      linters:
+        - lll

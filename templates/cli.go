@@ -1,5 +1,14 @@
 package templates
 
+const CliMainGo = `package main
+
+import "gitea.example.com/owner/repo/cmd"
+
+func main() {
+	cmd.Execute()
+}
+`
+
 const CliRunGo = `package cmd
 
 import (

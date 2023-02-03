@@ -1,4 +1,4 @@
-package templates
+package golang
 
 const Dockerfile = `FROM golang:1.19.1 AS build
 WORKDIR /

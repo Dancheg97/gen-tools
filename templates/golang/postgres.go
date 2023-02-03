@@ -1,4 +1,4 @@
-package templates
+package golang
 
 const SqlcSql = `-- name: SelectSomething :one
 

@@ -1,4 +1,4 @@
-package templates
+package golang
 
 const GolangCiYml = `run:
 timeout: 3m

@@ -3,7 +3,8 @@ package cmd
 import (
 	"os"
 
-	"gitea.dancheg97.ru/templates/go-tools/templates"
+	"gitea.dancheg97.ru/templates/gen-tools/templates"
+	"gitea.dancheg97.ru/templates/gen-tools/templates/golang"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
@@ -22,7 +23,7 @@ var genCmd = &cobra.Command{
 📃 Options you can specify under 'gen' command:
 
 This tool allows to generate prepared go code for interaction with following
-infrastructure components (go-tools gen [options]):
+infrastructure components (gen-tools gen [options]):
 
 - cli - incluudes cobra and viper
 - drone - includes drone template for CI-CD
@@ -38,7 +39,7 @@ infrastructure components (go-tools gen [options]):
 
 📒 Recommened to always use in projects:
 
-go-tools gen cli lint docker makefile license
+gen-tools gen cli lint docker makefile license
 `,
 }
 
@@ -49,42 +50,48 @@ func Gen(cmd *cobra.Command, args []string) {
 
 	for _, arg := range args {
 		switch arg {
-		case "cli":
-			errs = append(errs, os.WriteFile("main.go", []byte(templates.CliMainGo), 0600))
-			errs = append(errs, os.MkdirAll("cmd", os.ModePerm))
-			errs = append(errs, os.WriteFile("cmd/flags.go", []byte(templates.CliFlagsGo), 0600))
-			errs = append(errs, os.WriteFile("cmd/run.go", []byte(templates.CliRunGo), 0600))
-			errs = append(errs, os.WriteFile("cmd/root.go", []byte(templates.CliRootGo), 0600))
+		// OVERALL
 		case "drone":
 			errs = append(errs, os.WriteFile(".drone.yml", []byte(templates.DroneYml), 0600))
-		case "lint":
-			errs = append(errs, os.WriteFile(".golangci.yml", []byte(templates.GolangCiYml), 0600))
-		case "grpc":
-			errs = append(errs, os.WriteFile("buf.yaml", []byte(templates.BufYaml), 0600))
-			errs = append(errs, os.WriteFile("buf.gen.yaml", []byte(templates.BufGenYaml), 0600))
-		case "docker":
-			errs = append(errs, os.WriteFile("Dockerfile", []byte(templates.Dockerfile), 0600))
-			errs = append(errs, os.WriteFile("docker-compose.yml", []byte(templates.DockerCompose), 0600))
-		case "pg":
-			errs = append(errs, os.WriteFile("sqlc.yaml", []byte(templates.SqlcYaml), 0600))
-			errs = append(errs, os.WriteFile("sqlc.sql", []byte(templates.SqlcSql), 0600))
-			errs = append(errs, os.MkdirAll("migrations", os.ModePerm))
-			errs = append(errs, os.WriteFile("migrations/0001_ini.sql", []byte(templates.MigrationSql), 0600))
-			errs = append(errs, os.MkdirAll("postgres", os.ModePerm))
-			errs = append(errs, os.WriteFile("postgres/postgres.go", []byte(templates.PostgresGo), 0600))
-		case "redis":
-			errs = append(errs, os.MkdirAll("redis", os.ModePerm))
-			errs = append(errs, os.WriteFile("redis/redis.go", []byte(templates.RedisGo), 0600))
-		case "nats":
-			errs = append(errs, os.MkdirAll("nats", os.ModePerm))
-			errs = append(errs, os.WriteFile("nats/consumer.go", []byte(templates.NatsConsumerGo), 0600))
-			errs = append(errs, os.WriteFile("nats/producer.go", []byte(templates.NatsProducerGo), 0600))
 		case "make":
 			errs = append(errs, os.WriteFile("Makefile", []byte(templates.Makefile), 0600))
 		case "gpl":
 			errs = append(errs, os.WriteFile("LICENSE", []byte(templates.LicenseGPLv3), 0600))
 		case "mit":
 			errs = append(errs, os.WriteFile("LICENSE", []byte(templates.LicenseMIT), 0600))
+		// GOLANG
+		case "go-cli":
+			errs = append(errs, os.WriteFile("main.go", []byte(golang.CliMainGo), 0600))
+			errs = append(errs, os.MkdirAll("cmd", os.ModePerm))
+			errs = append(errs, os.WriteFile("cmd/flags.go", []byte(golang.CliFlagsGo), 0600))
+			errs = append(errs, os.WriteFile("cmd/run.go", []byte(golang.CliRunGo), 0600))
+			errs = append(errs, os.WriteFile("cmd/root.go", []byte(golang.CliRootGo), 0600))
+		case "go-lint":
+			errs = append(errs, os.WriteFile(".golangci.yml", []byte(golang.GolangCiYml), 0600))
+		case "go-grpc":
+			errs = append(errs, os.WriteFile("buf.yaml", []byte(golang.BufYaml), 0600))
+			errs = append(errs, os.WriteFile("buf.gen.yaml", []byte(golang.BufGenYaml), 0600))
+		case "go-docker":
+			errs = append(errs, os.WriteFile("Dockerfile", []byte(golang.Dockerfile), 0600))
+			errs = append(errs, os.WriteFile("docker-compose.yml", []byte(golang.DockerCompose), 0600))
+		case "go-pg":
+			errs = append(errs, os.WriteFile("sqlc.yaml", []byte(golang.SqlcYaml), 0600))
+			errs = append(errs, os.WriteFile("sqlc.sql", []byte(golang.SqlcSql), 0600))
+			errs = append(errs, os.MkdirAll("migrations", os.ModePerm))
+			errs = append(errs, os.WriteFile("migrations/0001_ini.sql", []byte(golang.MigrationSql), 0600))
+			errs = append(errs, os.MkdirAll("postgres", os.ModePerm))
+			errs = append(errs, os.WriteFile("postgres/postgres.go", []byte(golang.PostgresGo), 0600))
+		case "go-redis":
+			errs = append(errs, os.MkdirAll("redis", os.ModePerm))
+			errs = append(errs, os.WriteFile("redis/redis.go", []byte(golang.RedisGo), 0600))
+		case "go-nats":
+			errs = append(errs, os.MkdirAll("nats", os.ModePerm))
+			errs = append(errs, os.WriteFile("nats/consumer.go", []byte(golang.NatsConsumerGo), 0600))
+			errs = append(errs, os.WriteFile("nats/producer.go", []byte(golang.NatsProducerGo), 0600))
+		// CTRL
+		case "pkgbuild":
+			// add ctrl pkgbuild example
+		// UNKNOWN
 		default:
 			logrus.Error("unknown arguement: ", arg)
 		}

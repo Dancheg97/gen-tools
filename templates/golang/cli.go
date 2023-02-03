@@ -1,4 +1,4 @@
-package templates
+package golang
 
 const CliMainGo = `package main
 
@@ -43,7 +43,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "go-tools",
+	Use:   "gen-tools",
 	Short: "🧰 Cli tool for something awesome.",
 	Long:  "long example",
 }

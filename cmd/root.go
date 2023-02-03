@@ -8,13 +8,13 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "go-tools",
+	Use:   "gen-tools",
 	Short: "🧰 Tool for generating go project templates.",
 	Long: `🧰 Tool for generating go project templates.
 
 	LICENSE
 
-	go-tools  Copyright (C) 2023  Dancheg97
+	gen-tools  Copyright (C) 2023  Dancheg97
 	
 	This program comes with ABSOLUTELY NO WARRANTY; for details 'use -h flag'.
 	This is free software, and you are welcome to redistribute it
@@ -23,7 +23,7 @@ var rootCmd = &cobra.Command{
 📃 Options you can specify under 'gen' command:
 
 This tool allows to generate prepared go code for interaction with following
-infrastructure components (go-tools gen [options]):
+infrastructure components (gen-tools gen [options]):
 
 - cli - incluudes cobra and viper
 - drone - includes drone template for CI-CD

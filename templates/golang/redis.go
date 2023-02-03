@@ -1,4 +1,4 @@
-package templates
+package golang
 
 const RedisGo = `package redis
 

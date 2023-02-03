@@ -4,77 +4,79 @@
 
 <h2 align="center">Go tools</h2>
 
-[![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-red.svg)](https://gitea.dancheg97.ru/templates/go-tools/src/branch/main/LICENSE)
-[![Generic badge](https://img.shields.io/badge/GITEA-REPO-orange.svg)](https://gitea.dancheg97.ru/templates/go-tools)
-[![Generic badge](https://img.shields.io/badge/DOCKER-CONTAINER-blue.svg)](https://gitea.dancheg97.ru/templates/-/packages/container/go-tools/latest)
-[![Build Status](https://drone.dancheg97.ru/api/badges/templates/go-tools/status.svg)](https://drone.dancheg97.ru/templates/go-tools)
+[![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-red.svg)](https://gitea.dancheg97.ru/templates/gen-tools/src/branch/main/LICENSE)
+[![Generic badge](https://img.shields.io/badge/GITEA-REPO-orange.svg)](https://gitea.dancheg97.ru/templates/gen-tools)
+[![Generic badge](https://img.shields.io/badge/DOCKER-CONTAINER-blue.svg)](https://gitea.dancheg97.ru/templates/-/packages/container/gen-tools/latest)
+[![Build Status](https://drone.dancheg97.ru/api/badges/templates/gen-tools/status.svg)](https://drone.dancheg97.ru/templates/gen-tools)
 
-🧰 CLI Tool for generating templates of go code for interaction with different
-elements of infrastructure.
+CLI Tool for generating different project modules for templating complex systems
+with ease.
 
 📃 Options you can specify under 'gen' command:
 
 This tool allows to generate prepared go code for interaction with following
-infrastructure components (go-tools gen [options]):
+infrastructure components (gen-tools gen [options]):
 
-- **cli** - includes cobra and viper
-- **drone** - includes drone template for CI-CD
-- **lint** - includes golanglint-ci linter for go code
-- **grpc** - includes proto and buf files for generation
-- **docker** - includes 2 stage dockerfile and compose for ease of development
-- **pg** - includes pgx module in porstgres, sqlc for generation and goose for migrations
-- **redis** - includes redis template
-- **nats** - includes consumer and producer nats template
-- **license** - adds GPLv3 license to project
+- **drone** - includes `drone` template for `CI-CD`
+- **go-cli** - includes `cobra` and `viper`
+- **go-lint** - includes `golanglint-ci` linter for go code
+- **go-grpc** - includes `proto` and buf files for generation
+- **go-docker** - includes 2 stage `Dockerfile` and compose for ease of development
+- **go-pg** - includes `pgx` module in porstgres, `sqlc` for generation and `goose` for migrations
+- **go-redis** - includes `redis` template
+- **go-nats** - includes consumer and producer `nats` template
+- **license** - adds `GPLv3` license to project
+- **make** - adds `Makefile` to project
+- **pkgbuild** - arch format `PKGBUILD` for packaging
 
 ### Installation:
 
 - docker
 
 ```
-docker pull gitea.dancheg97.ru/templates/go-tools:latest
+docker pull gitea.dancheg97.ru/templates/gen-tools:latest
 ```
 
 - go
 
 ```
-go install gitea.dancheg97.ru/templates/go-tools@latest
+go install gitea.dancheg97.ru/templates/gen-tools@latest
 ```
 
 ### Examples:
 
-- [go-tools](README.md) - tool for generating go project templates
+- [gen-tools](README.md) - tool for generating go project templates
 
 ```sh
-go-tools gen cli lint docker makefile gpl
+gen-tools gen cli lint docker makefile gpl
 ```
 
 - [gofumpt](https://github.com/mvdan/gofumpt) - tool for formatting go code
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/go-tools:latest gofumpt --help
+docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest gofumpt --help
 ```
 
 - [golanglint-ci](https://golangci-lint.run/) - tool for linting go code, [config template](.golangci.yml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/go-tools:latest golanglint-ci --help
+docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest golanglint-ci --help
 ```
 
 - [buf](https://docs.buf.build/introduction) - tool for helping with protocol buffers and gRPC, [buf example](buf.yaml), [buf gen example](buf.gen.yaml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/go-tools:latest buf --help
+docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest buf --help
 ```
 
 - [sqlc](https://docs.sqlc.dev/en/stable) - tool for generating type-safe go code from sql queries, [sqlc.sql example](sqlc.sql), config - [sqlc.yaml example](sqlc.yaml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/go-tools:latest sqlc --help
+docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest sqlc --help
 ```
 
 - [go-swag](https://github.com/swaggo/swag) - tool for generating `swagger.yaml` from code annotations.
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/go-tools:latest swag --help
+docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest swag --help
 ```

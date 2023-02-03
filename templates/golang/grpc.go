@@ -1,4 +1,4 @@
-package templates
+package golang
 
 const BufGenYaml = `version: v1
 plugins:

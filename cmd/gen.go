@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"gitea.dancheg97.ru/templates/gen-tools/templates"
+	"gitea.dancheg97.ru/templates/gen-tools/templates/arch"
 	"gitea.dancheg97.ru/templates/gen-tools/templates/golang"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -65,9 +66,9 @@ func Gen(cmd *cobra.Command, args []string) {
 			errs = append(errs, os.MkdirAll("nats", os.ModePerm))
 			errs = append(errs, os.WriteFile("nats/consumer.go", []byte(golang.NatsConsumerGo), 0600))
 			errs = append(errs, os.WriteFile("nats/producer.go", []byte(golang.NatsProducerGo), 0600))
-		// CTRL
+			// CTRL
 		case "pkgbuild":
-			// add ctrl pkgbuild example
+			errs = append(errs, os.WriteFile("PKGBUILD", []byte(arch.Pkgbuild), 0600))
 		// UNKNOWN
 		default:
 			logrus.Error("unknown arguement: ", arg)

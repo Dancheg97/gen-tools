@@ -9,7 +9,7 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "gen-tools",
-	Short: "🧰 Tool for generating go project templates.",
+	Short: "🧰 Tool for generating project templates written in go.",
 	Long: `🧰 CLI Tool for generating different project modules for templating
 complex systems with ease.
 

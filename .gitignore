@@ -22,3 +22,6 @@
 go.work
 
 src/**
+pkg/**
+**.pkg.tar.zst
+gen-tools

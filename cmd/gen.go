@@ -3,9 +3,9 @@ package cmd
 import (
 	"os"
 
-	"gitea.dancheg97.ru/templates/gen-tools/templates"
-	"gitea.dancheg97.ru/templates/gen-tools/templates/arch"
-	"gitea.dancheg97.ru/templates/gen-tools/templates/golang"
+	"dancheg97.ru/templates/gen-tools/templates"
+	"dancheg97.ru/templates/gen-tools/templates/arch"
+	"dancheg97.ru/templates/gen-tools/templates/golang"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )

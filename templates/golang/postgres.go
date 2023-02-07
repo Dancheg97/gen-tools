@@ -49,7 +49,7 @@ import (
 	"context"
 	"errors"
 
-	"gitea.dancheg97.ru/dancheg97/go-sqlc/gen/sqlc"
+	"dancheg97.ru/dancheg97/go-sqlc/gen/sqlc"
 	"github.com/jackc/pgconn"
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/log/logrusadapter"

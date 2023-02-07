@@ -1,4 +1,4 @@
-module gitea.dancheg97.ru/templates/gen-tools
+module dancheg97.ru/templates/gen-tools
 
 go 1.19
 

@@ -1,12 +1,12 @@
 <p align="center">
-<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="https://gitea.dancheg97.ru/repo-avatars/67-4297f15da3e76c29478ec89973007622" />
+<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="https://dancheg97.ru/repo-avatars/67-4297f15da3e76c29478ec89973007622" />
 </p>
 
 <h2 align="center">Template generation tools</h2>
 
-[![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-red.svg)](https://gitea.dancheg97.ru/templates/gen-tools/src/branch/main/LICENSE)
-[![Generic badge](https://img.shields.io/badge/GITEA-REPO-orange.svg)](https://gitea.dancheg97.ru/templates/gen-tools)
-[![Generic badge](https://img.shields.io/badge/DOCKER-CONTAINER-blue.svg)](https://gitea.dancheg97.ru/templates/-/packages/container/gen-tools/latest)
+[![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-red.svg)](https://dancheg97.ru/templates/gen-tools/src/branch/main/LICENSE)
+[![Generic badge](https://img.shields.io/badge/GITEA-REPO-orange.svg)](https://dancheg97.ru/templates/gen-tools)
+[![Generic badge](https://img.shields.io/badge/DOCKER-CONTAINER-blue.svg)](https://dancheg97.ru/templates/-/packages/container/gen-tools/latest)
 [![Generic badge](https://img.shields.io/badge/AUR-REPO-cyan.svg)](https://aur.archlinux.org/packages/gen-tools)
 [![Build Status](https://drone.dancheg97.ru/api/badges/templates/gen-tools/status.svg)](https://drone.dancheg97.ru/templates/gen-tools)
 
@@ -45,13 +45,13 @@ infrastructure components (gen-tools gen [options]):
 - docker
 
 ```
-docker pull gitea.dancheg97.ru/templates/gen-tools:latest
+docker pull dancheg97.ru/templates/gen-tools:latest
 ```
 
 - go
 
 ```
-go install gitea.dancheg97.ru/templates/gen-tools@latest
+go install dancheg97.ru/templates/gen-tools@latest
 ```
 
 ### Examples:
@@ -65,29 +65,29 @@ gen-tools gen cli lint docker makefile gpl
 - [gofumpt](https://github.com/mvdan/gofumpt) - tool for formatting go code
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest gofumpt --help
+docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest gofumpt --help
 ```
 
 - [golanglint-ci](https://golangci-lint.run/) - tool for linting go code, [config template](.golangci.yml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest golanglint-ci --help
+docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest golanglint-ci --help
 ```
 
 - [buf](https://docs.buf.build/introduction) - tool for helping with protocol buffers and gRPC, [buf example](buf.yaml), [buf gen example](buf.gen.yaml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest buf --help
+docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest buf --help
 ```
 
 - [sqlc](https://docs.sqlc.dev/en/stable) - tool for generating type-safe go code from sql queries, [sqlc.sql example](sqlc.sql), config - [sqlc.yaml example](sqlc.yaml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest sqlc --help
+docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest sqlc --help
 ```
 
 - [go-swag](https://github.com/swaggo/swag) - tool for generating `swagger.yaml` from code annotations.
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest swag --help
+docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest swag --help
 ```

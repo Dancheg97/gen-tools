@@ -18,7 +18,7 @@ steps:
       - name: docker
         path: /var/run/docker.sock
     commands:
-      - docker build -t gitea.dancheg97.ru/$DRONE_REPO:latest -t gitea.dancheg97.ru/$DRONE_REPO:$(date +"%m-%d-%y") .
+      - docker build -t dancheg97.ru/$DRONE_REPO:latest -t dancheg97.ru/$DRONE_REPO:$(date +"%m-%d-%y") .
 
   - name: push
     image: docker
@@ -29,6 +29,6 @@ steps:
       - name: docker
         path: /var/run/docker.sock
     commands:
-      - docker login -u dancheg97 -p $PASS gitea.dancheg97.ru
-      - docker push gitea.dancheg97.ru/$DRONE_REPO:latest
-      - docker push gitea.dancheg97.ru/$DRONE_REPO:$(date +"%m-%d-%y")
+      - docker login -u dancheg97 -p $PASS dancheg97.ru
+      - docker push dancheg97.ru/$DRONE_REPO:latest
+      - docker push dancheg97.ru/$DRONE_REPO:$(date +"%m-%d-%y")

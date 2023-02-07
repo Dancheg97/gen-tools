@@ -1,41 +1,41 @@
 package devops
 
 const GiteaYaml = `  gitea:
-image: gitea/gitea:1.17.3
-container_name: gitea
-restart: unless-stopped
-environment:
-  USER_UID: 1000
-  USER_GID: 1000
-  GITEA__server__APP_DATA_PATH: /data/gitea
-  GITEA__server__DOMAIN: example.com
-  GITEA__server__SSH_DOMAIN: example.com
-  GITEA__server__HTTP_PORT: 80
-  GITEA__server__ROOT_URL: https://example.com/
-  GITEA__server__DISABLE_SSH: false
-  GITEA__server__SSH_PORT: 22
-  GITEA__server__SSH_LISTEN_PORT: 22
-  GITEA__server__LFS_START_SERVER: true
-  GITEA__server__LFS_JWT_SECRET: J6-A9H6vh8ELmg7br49Xxb3obmf5_gPO4Ix_qGvM7Fc
-  GITEA__server__OFFLINE_MODE: false
-  GITEA__ui__THEMES: gitea,arc-green,plex,aquamarine,dark,dracula,hotline,organizr,space-gray,hotpink,onedark,overseerr,nord,earl-grey
-  GITEA__ui__DEFAULT_THEME: earl-grey
-  GITEA__service_DISABLE_REGISTRATION: false
-  GITEA__service_REQUIRE_SIGNIN_VIEW: false
-  GITEA__service_REGISTER_EMAIL_CONFIRM: false
-  GITEA__service_ENABLE_NOTIFY_MAIL: false
-  GITEA__service_ALLOW_ONLY_EXTERNAL_REGISTRATION: false
-  GITEA__service_ENABLE_CAPTCHA: false
-  GITEA__service_DEFAULT_KEEP_EMAIL_PRIVATE: false
-  GITEA__service_DEFAULT_ALLOW_CREATE_ORGANIZATION: true
-  GITEA__service_DEFAULT_ENABLE_TIMETRACKING: true
-  GITEA__service_NO_REPLY_ADDRESS: noreply.localhost
-  GITEA__service_DEFAULT_USER_IS_RESTRICTED: true
-  GITEA__security__DISABLE_GIT_HOOKS: false
-volumes:
-  - ./gitea:/data
-  - /etc/timezone:/etc/timezone:ro
-  - /etc/localtime:/etc/localtime:ro
+    image: gitea/gitea:1.17.3
+    container_name: gitea
+    restart: unless-stopped
+    environment:
+      USER_UID: 1000
+      USER_GID: 1000
+      GITEA__server__APP_DATA_PATH: /data/gitea
+      GITEA__server__DOMAIN: example.com
+      GITEA__server__SSH_DOMAIN: example.com
+      GITEA__server__HTTP_PORT: 80
+      GITEA__server__ROOT_URL: https://example.com/
+      GITEA__server__DISABLE_SSH: false
+      GITEA__server__SSH_PORT: 22
+      GITEA__server__SSH_LISTEN_PORT: 22
+      GITEA__server__LFS_START_SERVER: true
+      GITEA__server__LFS_JWT_SECRET: J6-A9H6vh8ELmg7br49Xxb3obmf5_gPO4Ix_qGvM7Fc
+      GITEA__server__OFFLINE_MODE: false
+      GITEA__ui__THEMES: gitea,arc-green,plex,aquamarine,dark,dracula,hotline,organizr,space-gray,hotpink,onedark,overseerr,nord,earl-grey
+      GITEA__ui__DEFAULT_THEME: earl-grey
+      GITEA__service_DISABLE_REGISTRATION: false
+      GITEA__service_REQUIRE_SIGNIN_VIEW: false
+      GITEA__service_REGISTER_EMAIL_CONFIRM: false
+      GITEA__service_ENABLE_NOTIFY_MAIL: false
+      GITEA__service_ALLOW_ONLY_EXTERNAL_REGISTRATION: false
+      GITEA__service_ENABLE_CAPTCHA: false
+      GITEA__service_DEFAULT_KEEP_EMAIL_PRIVATE: false
+      GITEA__service_DEFAULT_ALLOW_CREATE_ORGANIZATION: true
+      GITEA__service_DEFAULT_ENABLE_TIMETRACKING: true
+      GITEA__service_NO_REPLY_ADDRESS: noreply.localhost
+      GITEA__service_DEFAULT_USER_IS_RESTRICTED: true
+      GITEA__security__DISABLE_GIT_HOOKS: false
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
 `
 
 const GiteaThemeParkTmpl = `{{ if .IsSigned }}

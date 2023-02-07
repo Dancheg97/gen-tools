@@ -110,9 +110,10 @@ func WriteFile(file string, content string) {
 
 func AppendToFile(file string, content string) {
 	PrepareDir(file)
-	f, err := os.Open(file)
+	f, err := os.OpenFile(file, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	checkErr(err)
-	_, err = f.Write([]byte(content))
+
+	_, err = f.WriteString(content)
 	checkErr(err)
 	logrus.Info("File modified: ", file)
 }

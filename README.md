@@ -4,9 +4,10 @@
 
 <h2 align="center">Template generation tools</h2>
 
-[![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-red.svg)](https://dancheg97.ru/templates/gen-tools/src/branch/main/LICENSE)
-[![Generic badge](https://img.shields.io/badge/GITEA-REPO-orange.svg)](https://dancheg97.ru/templates/gen-tools)
-[![Generic badge](https://img.shields.io/badge/DOCKER-CONTAINER-blue.svg)](https://dancheg97.ru/templates/-/packages/container/gen-tools/latest)
+[![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-orange.svg)](https://dancheg97.ru/templates/gen-tools/src/branch/main/LICENSE)
+[![Generic badge](https://img.shields.io/badge/GITEA-REPO-red.svg)](https://dancheg97.ru/templates/gen-tools)
+[![Generic badge](https://img.shields.io/badge/GITHUB-REPO-white.svg)](https://github.com/dancheg97/gen-tools)
+[![Generic badge](https://img.shields.io/badge/DOCKER-REGISTRY-blue.svg)](https://dancheg97.ru/templates/-/packages/container/gen-tools/latest)
 [![Generic badge](https://img.shields.io/badge/AUR-REPO-cyan.svg)](https://aur.archlinux.org/packages/gen-tools)
 [![Build Status](https://drone.dancheg97.ru/api/badges/templates/gen-tools/status.svg)](https://drone.dancheg97.ru/templates/gen-tools)
 
@@ -58,6 +59,12 @@ docker pull dancheg97.ru/templates/gen-tools:latest
 
 ```
 go install dancheg97.ru/templates/gen-tools@latest
+```
+
+- yay
+
+```
+yay -Sy gen-tools
 ```
 
 ### Examples:

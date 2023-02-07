@@ -27,9 +27,10 @@ steps:
       remote: ssh://git@github.com/dancheg97/gen-tools.git
       force: false
       commit: true
-      ssh_key: $SSHKEY
+      ssh_key:
+        from_secret: SSHKEY
 
-  - name: push
+  - name: push registry
     image: docker
     environment:
       PASS:

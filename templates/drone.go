@@ -31,7 +31,7 @@ steps:
       - name: docker
         path: /var/run/docker.sock
     commands:
-      - docker login -u dancheg97 -p $PASS gitea.example.org
+      - docker login -u login -p $PASS gitea.example.org
       - docker push gitea.example.org/$DRONE_REPO:latest
       - docker push gitea.example.org/$DRONE_REPO:$(date +"%m-%d-%y")
 `

@@ -6,7 +6,6 @@ import (
 	"strings"
 
 	"dancheg97.ru/templates/gen-tools/templates"
-	"dancheg97.ru/templates/gen-tools/templates/arch"
 	"dancheg97.ru/templates/gen-tools/templates/devops"
 	"dancheg97.ru/templates/gen-tools/templates/golang"
 	"github.com/sirupsen/logrus"
@@ -41,6 +40,8 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("LICENSE", templates.LicenseMIT)
 		case "lego":
 			WriteFile("lego.sh", templates.LegoSh)
+		case "pkgbuild":
+			WriteFile("PKGBUILD", templates.Pkgbuild)
 
 		// DEVOPS
 		case "compose-gitea":
@@ -89,9 +90,6 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("nats/consumer.go", golang.NatsConsumerGo)
 			WriteFile("nats/producer.go", golang.NatsProducerGo)
 
-		// ARCH
-		case "pkgbuild":
-			WriteFile("PKGBUILD", arch.Pkgbuild)
 		// UNKNOWN
 		default:
 			logrus.Error("unknown arguement: ", arg)

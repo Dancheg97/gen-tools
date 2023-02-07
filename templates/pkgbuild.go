@@ -1,4 +1,4 @@
-package arch
+package templates
 
 const Pkgbuild = `# Maintainer: Name <name@example.com>
 

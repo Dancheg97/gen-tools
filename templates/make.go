@@ -13,4 +13,11 @@ gen:
 	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest swag fmt
 	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest swag init \
 	 --parseDependency --parseInternal --parseDepth 1 -o . -ot yaml
+
+.PHONY: cert
+cert:
+	go install github.com/go-acme/lego/v4/cmd/lego@latest
+	sudo lego --email="name@example.com" --domains="sub.example.com" --http run
+	sudo chown a+rwx -R .lego
+ 
 `

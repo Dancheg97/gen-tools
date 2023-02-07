@@ -102,15 +102,15 @@ func setLogFormat() {
 		logrus.SetFormatter(&logrus.TextFormatter{})
 	case "pretty":
 		logrus.SetFormatter(&logrus.TextFormatter{
-			ForceColors:   true,
-			DisableQuote:  true,
-			FullTimestamp: true,
+			ForceColors:      true,
+			DisableQuote:     true,
+			DisableTimestamp: true,
 		})
 	default:
 		logrus.SetFormatter(&logrus.TextFormatter{
-			ForceColors:   true,
-			DisableQuote:  true,
-			FullTimestamp: true,
+			ForceColors:      true,
+			DisableQuote:     true,
+			DisableTimestamp: true,
 		})
 	}
 }

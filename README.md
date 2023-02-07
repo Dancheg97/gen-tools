@@ -20,7 +20,7 @@ This tool allows to generate prepared go code for interaction with following
 infrastructure components (gen-tools gen [options]):
 
 - **drone** - includes drone.yml template for project CI-CD
-- **license** - adds GPLv3 license to project
+- **licenses** - adds GPLv3 license to project, options - mit/gpl
 - **make** - adds Makefile to project
 - **pkgbuild** - arch format PKGBUILD for packaging
 - **lego** - generates templates of commands for lego, to simplify process of obtaining certificates

@@ -120,7 +120,7 @@ func AppendToCompose(content string) {
 }
 
 func PrepareDir(filePath string) {
-	if len(strings.Split(filePath, `/`)) != 0 {
+	if len(strings.Split(filePath, `/`)) != 1 {
 		splitted := strings.Split(filePath, `/`)
 		path := strings.Join(splitted[0:len(splitted)-1], `/`)
 		err := os.MkdirAll(path, os.ModePerm)

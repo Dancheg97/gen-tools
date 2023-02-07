@@ -11,7 +11,8 @@
 [![Build Status](https://drone.dancheg97.ru/api/badges/templates/gen-tools/status.svg)](https://drone.dancheg97.ru/templates/gen-tools)
 
 CLI Tool for generating different project modules for templating complex systems
-with ease.
+with ease. Dockerized version also provides set of tools for code generation and
+linting.
 
 📃 Options you can specify under 'gen' command:
 

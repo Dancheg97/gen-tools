@@ -1,3 +1,7 @@
+pwd := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+
+build:
+	docker build -t dancheg97.ru/templates/gen-tools:latest .
 
 check:
 	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest gofumpt -l -w .

@@ -37,6 +37,9 @@ func Gen(cmd *cobra.Command, args []string) {
 			errs = append(errs, os.WriteFile("LICENSE", []byte(templates.LicenseGPLv3), 0600))
 		case "mit":
 			errs = append(errs, os.WriteFile("LICENSE", []byte(templates.LicenseMIT), 0600))
+		case "lego":
+			errs = append(errs, os.WriteFile("lego.sh", []byte(templates.LegoSh), 0600))
+
 		// GOLANG
 		case "go-cli":
 			errs = append(errs, os.WriteFile("main.go", []byte(golang.CliMainGo), 0600))

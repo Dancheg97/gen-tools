@@ -43,8 +43,6 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("lego.sh", templates.LegoSh)
 
 		// DEVOPS
-		case "compose-drone":
-			AppendToCompose(devops.DroneYaml)
 		case "compose-gitea":
 			AppendToCompose(devops.GiteaYaml)
 			WriteFile(`gitea/gitea/templates/home.tmpl`, devops.GiteaHomeTmpl)
@@ -55,8 +53,16 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile(`nginx/nginx.conf`, devops.NginxConf)
 		case "compose-pacman":
 			AppendToCompose(devops.PacmanYaml)
-		case "pocketbase-pacman":
+		case "compose-pocketbase":
 			AppendToCompose(devops.PocketbaseYaml)
+		case "compose-nats":
+			AppendToCompose(devops.NatsYaml)
+		case "compose-postgres":
+			AppendToCompose(devops.PostgresYml)
+		case "compose-redis":
+			AppendToCompose(devops.RedisYaml)
+		case "compose-drone":
+			AppendToCompose(devops.DroneYaml)
 
 		// GOLANG
 		case "go-cli":

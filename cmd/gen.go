@@ -20,7 +20,7 @@ var genCmd = &cobra.Command{
 	Use:     "gen",
 	Short:   "📃 Generate template components",
 	Run:     Gen,
-	Example: "drone ",
+	Example: "drone gen gpl drone go-cli go-nats",
 }
 
 func Gen(cmd *cobra.Command, args []string) {

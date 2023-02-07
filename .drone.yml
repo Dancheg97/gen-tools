@@ -20,6 +20,15 @@ steps:
     commands:
       - docker build -t dancheg97.ru/$DRONE_REPO:latest -t dancheg97.ru/$DRONE_REPO:$(date +"%m-%d-%y") .
 
+  - name: push github
+    image: appleboy/drone-git-push
+    settings:
+      branch: master
+      remote: ssh://git@github.com/dancheg97/gen-tools.git
+      force: false
+      commit: true
+      ssh_key: $SSHKEY
+
   - name: push
     image: docker
     environment:

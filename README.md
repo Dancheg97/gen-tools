@@ -2,11 +2,12 @@
 <img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="https://gitea.dancheg97.ru/repo-avatars/67-4297f15da3e76c29478ec89973007622" />
 </p>
 
-<h2 align="center">Go tools</h2>
+<h2 align="center">Template generation tools</h2>
 
 [![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-red.svg)](https://gitea.dancheg97.ru/templates/gen-tools/src/branch/main/LICENSE)
 [![Generic badge](https://img.shields.io/badge/GITEA-REPO-orange.svg)](https://gitea.dancheg97.ru/templates/gen-tools)
 [![Generic badge](https://img.shields.io/badge/DOCKER-CONTAINER-blue.svg)](https://gitea.dancheg97.ru/templates/-/packages/container/gen-tools/latest)
+[![Generic badge](https://img.shields.io/badge/AUR-REPO-cyan.svg)](https://aur.archlinux.org/packages/gen-tools)
 [![Build Status](https://drone.dancheg97.ru/api/badges/templates/gen-tools/status.svg)](https://drone.dancheg97.ru/templates/gen-tools)
 
 CLI Tool for generating different project modules for templating complex systems
@@ -90,12 +91,3 @@ docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd gitea.dancheg97.ru/templates/gen-tools:latest swag --help
 ```
-
-<!--
-
-TODO
-
-- add working PKGBUILD to get ability to install via yay
-- add github&gitflic push via drone-ci
-
--->

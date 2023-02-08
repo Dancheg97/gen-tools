@@ -71,7 +71,7 @@ yay -Sy gen-tools
 - [gen-tools](README.md) - tool for generating go project templates
 
 ```sh
-gen-tools gen cli lint docker makefile gpl
+docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest gen-tools --help
 ```
 
 - [gofumpt](https://github.com/mvdan/gofumpt) - tool for formatting go code
@@ -102,4 +102,10 @@ docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest
 
 ```sh
 docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest swag --help
+```
+
+- [go-lego](https://github.com/swaggo/swag) - tool for generating `swagger.yaml` from code annotations.
+
+```sh
+docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest lego --help
 ```

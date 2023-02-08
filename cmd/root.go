@@ -28,7 +28,6 @@ complex systems with ease.
 - gpl - adds GPLv3 license to project
 - make - adds Makefile to project
 - pkgbuild - arch format PKGBUILD for packaging to AUR
-- lego - generates templates of commands for lego, to simplify process of obtaining certificates
 
 Compose file options:
 
@@ -59,7 +58,22 @@ gen-tools gen drone make gpl
 `,
 }
 
-var flags = []Flag{}
+var flags = []Flag{
+	{
+		Cmd:         rootCmd,
+		Name:        "name",
+		Env:         "NAME",
+		Value:       "Project",
+		Description: "📜 project name, used in devops overrides",
+	},
+	{
+		Cmd:         rootCmd,
+		Name:        "repo",
+		Env:         "REPO",
+		Value:       "example.com/owner/name",
+		Description: "📂 repository for go project, used in links and go mod init",
+	},
+}
 
 func Execute() {
 	for _, flag := range flags {

@@ -19,23 +19,10 @@ var genCmd = &cobra.Command{
 	Use:     "gen",
 	Short:   "📃 Generate template components",
 	Run:     Gen,
-	Example: "drone gen gpl drone go-cli go-nats",
-}
-
-var genFlags = []Flag{
-	{
-		Cmd:         genCmd,
-		Name:        "repo",
-		Env:         "REPO",
-		Value:       "example.com/owner/name",
-		Description: "repository for go project",
-	},
+	Example: "gen-tools --repo testgen go-lint go-grpc go-docker go-sqlc go-redis go-cli go-nats",
 }
 
 func init() {
-	for _, flag := range genFlags {
-		AddFlag(flag)
-	}
 	rootCmd.AddCommand(genCmd)
 }
 
@@ -54,8 +41,6 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("LICENSE", templates.LicenseGPLv3)
 		case "mit":
 			WriteFile("LICENSE", templates.LicenseMIT)
-		case "lego":
-			WriteFile("lego.sh", templates.LegoSh)
 		case "pkgbuild":
 			WriteFile("PKGBUILD", templates.Pkgbuild)
 
@@ -66,6 +51,7 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile(`gitea/gitea/templates/custom/body_outer_pre.tmpl`, devops.GiteaThemeParkTmpl)
 			WriteFile(`gitea/gitea/public/css/theme-earl-grey.css`, devops.GiteaEarlGrayCss)
 		case "compose-nginx":
+			WriteFile("lego.sh", devops.LegoSh)
 			AppendToCompose(devops.NginxYaml)
 			WriteFile(`nginx/nginx.conf`, devops.NginxConf)
 		case "compose-pacman":
@@ -93,7 +79,7 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("buf.gen.yaml", golang.BufGenYaml)
 			WriteFile("proto/v1/example.proto", golang.GrpcProto)
 			AppendToMakefile(golang.BufMake)
-			SystemCall("docker run --rm -v $(pwd):/src -w /src dancheg97.ru/templates/gen-tools:latest buf generate")
+			SystemCall("buf generate")
 		case "go-docker":
 			WriteFile("Dockerfile", golang.Dockerfile)
 			WriteFile("docker-compose.yml", golang.DockerCompose)
@@ -102,11 +88,11 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("database/queries.sql", golang.SqlcSql)
 			WriteFile("database/migrations/0001_ini.sql", golang.GooseMigrations)
 			AppendToMakefile(golang.SqlcMakefile)
-			SystemCall("docker run --rm -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest sqlc generate")
+			SystemCall("sqlc generate")
 		case "go-redis":
 			WriteFile("redis/redis.go", golang.RedisGo)
 		case "go-nats":
-			WriteFile("nats/consumer.go", fmt.Sprintf(golang.NatsWrapperGo, viper.GetString("repo")))
+			WriteFile("nats/nats.go", fmt.Sprintf(golang.NatsWrapperGo, viper.GetString("repo")))
 		case "go-cli":
 			WriteFile("main.go", fmt.Sprintf(golang.CliMainGo, viper.GetString("repo")))
 			WriteFile("cmd/flags.go", golang.CliFlagsGo)
@@ -120,6 +106,8 @@ func Gen(cmd *cobra.Command, args []string) {
 			logrus.Error("unknown arguement: ", arg)
 		}
 	}
+
+	SystemCall(`sudo chmod a+rwx -R .`)
 
 	logrus.Info("template generation finished")
 }
@@ -168,6 +156,9 @@ func PrepareDir(filePath string) {
 
 func SystemCall(cmd string) {
 	logrus.Info("Executing system call: ", cmd)
+	if os.Getenv("IN_DOCKER") != "true" {
+		cmd = "docker run --rm -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest " + cmd
+	}
 	commad := exec.Command("bash", "-c", cmd)
 	commad.Stdout = logrus.StandardLogger().Writer()
 	commad.Stderr = logrus.StandardLogger().Writer()

@@ -2,6 +2,8 @@ FROM archlinux/archlinux:base-devel
 
 LABEL maintainer="Dancheg97 <dangdancheg@gmail.com>"
 
+ARG IN_DOCKER=true
+
 RUN pacman -Syu --needed --noconfirm git go
 ENV PATH="${PATH}:/home/makepkg/go/bin"
 
@@ -28,5 +30,6 @@ RUN yay -Sy --noconfirm sqlc
 RUN go install mvdan.cc/gofumpt@latest
 RUN go install github.com/swaggo/swag/cmd/swag@v1.8.7
 RUN go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+RUN go install github.com/go-acme/lego/v4/cmd/lego@latest
 
 USER root

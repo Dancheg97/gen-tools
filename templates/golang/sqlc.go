@@ -13,7 +13,7 @@ sql:
     gen:
       go: 
         package: "postgres"
-        out: "gen/database/postgresql"
+        out: "gen/database/postgres"
         emit_interface: true
 `
 

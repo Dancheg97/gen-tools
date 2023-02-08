@@ -92,6 +92,7 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("buf.yaml", golang.BufYaml)
 			WriteFile("buf.gen.yaml", golang.BufGenYaml)
 			WriteFile("proto/v1/example.proto", golang.GrpcProto)
+			AppendToMakefile(golang.BufMake)
 			SystemCall("docker run --rm -v $(pwd):/src -w /src dancheg97.ru/templates/gen-tools:latest buf generate")
 		case "go-docker":
 			WriteFile("Dockerfile", golang.Dockerfile)
@@ -105,8 +106,7 @@ func Gen(cmd *cobra.Command, args []string) {
 		case "go-redis":
 			WriteFile("redis/redis.go", golang.RedisGo)
 		case "go-nats":
-			WriteFile("nats/consumer.go", golang.NatsConsumerGo)
-			WriteFile("nats/producer.go", golang.NatsProducerGo)
+			WriteFile("nats/consumer.go", fmt.Sprintf(golang.NatsWrapperGo, viper.GetString("repo")))
 		case "go-cli":
 			WriteFile("main.go", fmt.Sprintf(golang.CliMainGo, viper.GetString("repo")))
 			WriteFile("cmd/flags.go", golang.CliFlagsGo)

@@ -2,7 +2,9 @@ package cmd
 
 import (
 	"errors"
+	"fmt"
 	"os"
+	"os/exec"
 	"strings"
 
 	"dancheg97.ru/templates/gen-tools/templates"
@@ -10,17 +12,31 @@ import (
 	"dancheg97.ru/templates/gen-tools/templates/golang"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
-
-func init() {
-	rootCmd.AddCommand(genCmd)
-}
 
 var genCmd = &cobra.Command{
 	Use:     "gen",
 	Short:   "📃 Generate template components",
 	Run:     Gen,
 	Example: "drone gen gpl drone go-cli go-nats",
+}
+
+var genFlags = []Flag{
+	{
+		Cmd:         genCmd,
+		Name:        "repo",
+		Env:         "REPO",
+		Value:       "example.com/owner/name",
+		Description: "repository for go project",
+	},
+}
+
+func init() {
+	for _, flag := range genFlags {
+		AddFlag(flag)
+	}
+	rootCmd.AddCommand(genCmd)
 }
 
 func Gen(cmd *cobra.Command, args []string) {
@@ -70,11 +86,6 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile(`mkdocs/docs/stylesheets/extra.css`, devops.MkDocsCss)
 
 		// GOLANG
-		case "go-cli":
-			WriteFile("main.go", golang.CliMainGo)
-			WriteFile("cmd/flags.go", golang.CliFlagsGo)
-			WriteFile("cmd/run.go", golang.CliRunGo)
-			WriteFile("cmd/root.go", golang.CliRootGo)
 		case "go-lint":
 			WriteFile(".golangci.yml", golang.GolangCiYml)
 		case "go-grpc":
@@ -83,16 +94,24 @@ func Gen(cmd *cobra.Command, args []string) {
 		case "go-docker":
 			WriteFile("Dockerfile", golang.Dockerfile)
 			WriteFile("docker-compose.yml", golang.DockerCompose)
-		case "go-pg":
+		case "go-sqlc":
 			WriteFile("sqlc.yaml", golang.SqlcYaml)
-			WriteFile("sqlc.sql", golang.SqlcSql)
-			WriteFile("migrations/0001_ini.sql", golang.MigrationSql)
-			WriteFile("postgres/postgres.go", golang.PostgresGo)
+			WriteFile("database/queries.sql", golang.SqlcSql)
+			WriteFile("database/migrations/0001_ini.sql", golang.GooseMigrations)
+			AppendToMakefile(golang.SqlcMakefile)
+			SystemCall("docker run --rm -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest sqlc generate")
 		case "go-redis":
 			WriteFile("redis/redis.go", golang.RedisGo)
 		case "go-nats":
 			WriteFile("nats/consumer.go", golang.NatsConsumerGo)
 			WriteFile("nats/producer.go", golang.NatsProducerGo)
+		case "go-cli":
+			WriteFile("main.go", fmt.Sprintf(golang.CliMainGo, viper.GetString("repo")))
+			WriteFile("cmd/flags.go", golang.CliFlagsGo)
+			WriteFile("cmd/run.go", golang.CliRunGo)
+			WriteFile("cmd/root.go", golang.CliRootGo)
+			SystemCall("go mod init " + viper.GetString("repo"))
+			SystemCall("go mod tidy")
 
 		// UNKNOWN
 		default:
@@ -128,6 +147,14 @@ func AppendToCompose(content string) {
 	AppendToFile(compose, content)
 }
 
+func AppendToMakefile(content string) {
+	const makefile = `Makefile`
+	if _, err := os.Stat(makefile); errors.Is(err, os.ErrNotExist) {
+		WriteFile(makefile, "pwd := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))\n\n")
+	}
+	AppendToFile(makefile, content)
+}
+
 func PrepareDir(filePath string) {
 	if len(strings.Split(filePath, `/`)) != 1 {
 		splitted := strings.Split(filePath, `/`)
@@ -135,4 +162,12 @@ func PrepareDir(filePath string) {
 		err := os.MkdirAll(path, os.ModePerm)
 		checkErr(err)
 	}
+}
+
+func SystemCall(cmd string) {
+	logrus.Info("Executing system call: ", cmd)
+	commad := exec.Command("bash", "-c", cmd)
+	commad.Stdout = logrus.StandardLogger().Writer()
+	commad.Stderr = logrus.StandardLogger().Writer()
+	checkErr(commad.Run())
 }

@@ -2,7 +2,7 @@ package golang
 
 const CliMainGo = `package main
 
-import "gitea.example.com/owner/repo/cmd"
+import "%s/cmd"
 
 func main() {
 	cmd.Execute()

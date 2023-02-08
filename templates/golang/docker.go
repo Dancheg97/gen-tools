@@ -8,7 +8,7 @@ FROM alpine:3.16.2
 COPY --from=build /app .
 CMD /app`
 
-const DockerCompose = `version: '3.8'
+const DockerCompose = `version: '3.9'
 
 services:
   app:
@@ -17,7 +17,6 @@ services:
     command: run
     environment:
       LOGS_FMT: text
-	  EXAMPLE: hehe
     volumes:
       - ./host:/in/container
     ports:

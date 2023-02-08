@@ -15,14 +15,6 @@ sql:
         package: "postgres"
         out: "gen/database/postgresql"
         emit_interface: true
-  - schema: "database/migrations/"
-    queries: "database/queries.sql"
-    engine: "mysql"
-    gen:
-      go:
-        package: "mysql"
-        out: "gen/database/mysql"
-        emit_interface: true
 `
 
 const GooseMigrations = `-- +goose Up

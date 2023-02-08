@@ -91,6 +91,8 @@ func Gen(cmd *cobra.Command, args []string) {
 		case "go-grpc":
 			WriteFile("buf.yaml", golang.BufYaml)
 			WriteFile("buf.gen.yaml", golang.BufGenYaml)
+			WriteFile("proto/v1/example.proto", golang.GrpcProto)
+			SystemCall("docker run --rm -v $(pwd):/src -w /src dancheg97.ru/templates/gen-tools:latest buf generate")
 		case "go-docker":
 			WriteFile("Dockerfile", golang.Dockerfile)
 			WriteFile("docker-compose.yml", golang.DockerCompose)

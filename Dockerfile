@@ -2,7 +2,7 @@ FROM archlinux/archlinux:base-devel
 
 LABEL maintainer="Dancheg97 <dangdancheg@gmail.com>"
 
-ARG IN_DOCKER=true
+ENV IN_DOCKER=true
 
 RUN pacman -Syu --needed --noconfirm git go
 ENV PATH="${PATH}:/home/makepkg/go/bin"

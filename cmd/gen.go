@@ -31,7 +31,6 @@ func Gen(cmd *cobra.Command, args []string) {
 
 	for _, arg := range args {
 		switch arg {
-
 		// OVERALL
 		case "drone":
 			WriteFile(".drone.yml", templates.DroneYml)
@@ -87,6 +86,7 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("sqlc.yaml", golang.SqlcYaml)
 			WriteFile("sqlc.sql", golang.SqlcSql)
 			WriteFile("migrations/0001_ini.sql", golang.GooseMigrations)
+			WriteFile("postgres/postgres.go", fmt.Sprintf(golang.PostgresGo, viper.GetString("repo")))
 			AppendToMakefile(golang.SqlcMakefile)
 			SystemCall("sqlc generate")
 		case "go-redis":

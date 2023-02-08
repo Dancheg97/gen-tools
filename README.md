@@ -71,41 +71,41 @@ yay -Sy gen-tools
 - [gen-tools](README.md) - tool for generating go project templates
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest gen-tools --help
+docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest gen-tools --help
 ```
 
 - [gofumpt](https://github.com/mvdan/gofumpt) - tool for formatting go code
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest gofumpt --help
+docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest gofumpt --help
 ```
 
 - [golanglint-ci](https://golangci-lint.run/) - tool for linting go code, [config template](.golangci.yml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest golanglint-ci --help
+docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest golanglint-ci --help
 ```
 
 - [buf](https://docs.buf.build/introduction) - tool for helping with protocol buffers and gRPC, [buf example](buf.yaml), [buf gen example](buf.gen.yaml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest buf --help
+docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest buf --help
 ```
 
 - [sqlc](https://docs.sqlc.dev/en/stable) - tool for generating type-safe go code from sql queries, [sqlc.sql example](sqlc.sql), config - [sqlc.yaml example](sqlc.yaml)
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest sqlc --help
+docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest sqlc --help
 ```
 
 - [go-swag](https://github.com/swaggo/swag) - tool for generating `swagger.yaml` from code annotations.
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest swag --help
+docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest swag --help
 ```
 
 - [go-lego](https://github.com/swaggo/swag) - tool for generating `swagger.yaml` from code annotations.
 
 ```sh
-docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest lego --help
+docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest lego --help
 ```

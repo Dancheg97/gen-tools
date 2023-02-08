@@ -230,5 +230,12 @@ issues:
         - wrapcheck
         - errcheck
     - path: "license.go"
-      linters:
-        - lll
+      linters: [lll]
+    - path: "golangci.go"
+      linters: [lll]
+    - path: "gitea.go"
+      linters: [lll]
+    - path: "gen.go"
+      linters: [funlen, lll, cyclop]
+    - path: "root.go"
+      linters: [lll]

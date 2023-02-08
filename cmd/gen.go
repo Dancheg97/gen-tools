@@ -64,6 +64,10 @@ func Gen(cmd *cobra.Command, args []string) {
 			AppendToCompose(devops.RedisYaml)
 		case "compose-drone":
 			AppendToCompose(devops.DroneYaml)
+		case "compose-mkdocs":
+			AppendToCompose(devops.MkDocsCompose)
+			WriteFile(`mkdocs/mkdocs.yml`, devops.MkDocsConfigYaml)
+			WriteFile(`mkdocs/docs/stylesheets/extra.css`, devops.MkDocsCss)
 
 		// GOLANG
 		case "go-cli":

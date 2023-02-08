@@ -23,8 +23,6 @@ complex systems with ease.
 
 📃 Options you can specify under 'gen' command:
 
-Project independent:
-
 - drone - includes drone.yml template for project CI-CD
 - mit - adds MIT license to project
 - gpl - adds GPLv3 license to project
@@ -42,6 +40,7 @@ Compose file options:
 - compose-drone - adds drone server and runner to compose, with predifined parameters to connect to gitea
 - compose-pacman - adds self-hosted pacman repository for arch packages
 - compose-pocketbase - adds pocketbase template to compose (self-hosted real-time backend)
+- compose-mkdocs - adds mkdocs with theme, custom css and some preconfigured stuff
 
 Go code options:
 

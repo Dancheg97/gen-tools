@@ -14,4 +14,5 @@ const NatsYaml = `  nats:
       - STAN_URL=http://nats:4222
       - STAN_MONITOR_URL=http://nats:8222
       - STAN_CLUSTER=test-cluster
+
 `

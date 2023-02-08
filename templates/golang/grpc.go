@@ -41,8 +41,8 @@ message AddResponse {}
 
 const BufMake = `
 buf:
-  docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf lint
-  docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf format -w
-  docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf generate
+	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf lint
+	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf format -w
+	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf generate
 
 `

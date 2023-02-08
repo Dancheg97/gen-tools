@@ -85,8 +85,8 @@ func Gen(cmd *cobra.Command, args []string) {
 			WriteFile("docker-compose.yml", golang.DockerCompose)
 		case "go-sqlc":
 			WriteFile("sqlc.yaml", golang.SqlcYaml)
-			WriteFile("database/queries.sql", golang.SqlcSql)
-			WriteFile("database/migrations/0001_ini.sql", golang.GooseMigrations)
+			WriteFile("sqlc.sql", golang.SqlcSql)
+			WriteFile("migrations/0001_ini.sql", golang.GooseMigrations)
 			AppendToMakefile(golang.SqlcMakefile)
 			SystemCall("sqlc generate")
 		case "go-redis":

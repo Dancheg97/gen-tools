@@ -7,13 +7,13 @@ SELECT * FROM users WHERE id = $1;
 
 const SqlcYaml = `version: "2"
 sql:
-  - schema: "database/migrations/"
-    queries: "database/queries.sql"
+  - schema: "migrations/"
+    queries: "sqlc.sql"
     engine: "postgresql"
     gen:
       go: 
         package: "postgres"
-        out: "gen/database/postgres"
+        out: "gen/postgres"
         emit_interface: true
 `
 

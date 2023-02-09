@@ -26,7 +26,7 @@ func Gen(cmd *cobra.Command, args []string) {
 	mail := viper.GetString(`mail`)
 	domain := viper.GetString(`domain`)
 	user := viper.GetString(`user`)
-	password := viper.GetString(`password`)
+	pass := viper.GetString(`pass`)
 	gitea := viper.GetString(`gitea`)
 
 	setLogFormat()
@@ -57,7 +57,7 @@ func Gen(cmd *cobra.Command, args []string) {
 		case "compose-nats":
 			devops.GenerateNats()
 		case "compose-postgres":
-			devops.GeneratePostgres(user, password)
+			devops.GeneratePostgres(user, pass)
 		case "compose-redis":
 			devops.GenerateRedis()
 		case "compose-drone":

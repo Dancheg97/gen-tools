@@ -4,7 +4,7 @@ import "github.com/spf13/cobra"
 
 var infraCmd = &cobra.Command{
 	Use:     "infr",
-	Short:   "🐋 Generate all infrastructure in single command",
+	Short:   "🎚️ Generate all infrastructure in single command",
 	Run:     Infr,
 	Example: "gen-tools infr",
 }

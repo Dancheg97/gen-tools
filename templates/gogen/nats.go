@@ -1,4 +1,16 @@
-package golang
+package gogen
+
+import (
+	"fmt"
+
+	"dancheg97.ru/templates/gen-tools/templates/devops"
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GenerateNats(repo string) {
+	utils.WriteFile("nats/nats.go", fmt.Sprintf(NatsWrapperGo, repo))
+	utils.AppendToCompose(devops.NatsYaml)
+}
 
 const NatsWrapperGo = `package nats
 

@@ -31,7 +31,7 @@ RUN go install mvdan.cc/gofumpt@latest
 RUN go install github.com/swaggo/swag/cmd/swag@v1.8.7
 RUN go install github.com/go-swagger/go-swagger/cmd/swagger@latest
 RUN go install github.com/go-acme/lego/v4/cmd/lego@latest
-RUN $ go install github.com/pressly/goose/v3/cmd/goose@latest
+RUN go install github.com/pressly/goose/v3/cmd/goose@latest
 RUN go install dancheg97.ru/templates/gen-tools@latest
 
 USER root

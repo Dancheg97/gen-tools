@@ -1,6 +1,19 @@
 package devops
 
-const PocketbaseYaml = `  pocketbase:
+import (
+	"fmt"
+
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GeneratePocketbase(mail string, domain string) {
+	utils.AppendToCompose(PocketbaseYaml)
+	utils.AppendToNginx(fmt.Sprintf(PocketbaseNginx, domain, domain, domain))
+	utils.AppendToCerts(mail, "pocketbase."+domain)
+}
+
+const PocketbaseYaml = `
+  pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
     restart: unless-stopped
     volumes:
@@ -10,4 +23,18 @@ const PocketbaseYaml = `  pocketbase:
       interval: 5s
       timeout: 5s
       retries: 5
+
+`
+
+const PocketbaseNginx = `
+server {
+    listen 80;
+    listen 443 ssl;
+    server_name pocketbase.%s;
+    ssl_certificate /certs/pocketbase.%s.crt;
+    ssl_certificate_key /certs/pocketbase.%s.key;
+    location / {
+        proxy_pass http://pocketbase:8090/;
+    }
+}
 `

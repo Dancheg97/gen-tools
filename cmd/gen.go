@@ -1,15 +1,10 @@
 package cmd
 
 import (
-	"errors"
-	"fmt"
-	"os"
-	"os/exec"
-	"strings"
-
 	"dancheg97.ru/templates/gen-tools/templates"
 	"dancheg97.ru/templates/gen-tools/templates/devops"
-	"dancheg97.ru/templates/gen-tools/templates/golang"
+	"dancheg97.ru/templates/gen-tools/templates/gogen"
+	"dancheg97.ru/templates/gen-tools/templates/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -27,140 +22,70 @@ func init() {
 }
 
 func Gen(cmd *cobra.Command, args []string) {
+	repo := viper.GetString(`repo`)
+	mail := viper.GetString(`mail`)
+	domain := viper.GetString(`domain`)
+	user := viper.GetString(`user`)
+	pass := viper.GetString(`pass`)
+	gitea := viper.GetString(`gitea`)
+
 	setLogFormat()
 
 	for _, arg := range args {
 		switch arg {
 		// OVERALL
 		case "drone":
-			WriteFile(".drone.yml", templates.DroneYml)
+			templates.GenerateDroneYml(gitea)
 		case "make":
-			WriteFile("Makefile", templates.Makefile)
+			utils.WriteFile("Makefile", templates.Makefile)
 		case "gpl":
-			WriteFile("LICENSE", templates.LicenseGPLv3)
+			utils.WriteFile("LICENSE", templates.LicenseGPLv3)
 		case "mit":
-			WriteFile("LICENSE", templates.LicenseMIT)
+			utils.WriteFile("LICENSE", templates.LicenseMIT)
 		case "pkgbuild":
-			WriteFile("PKGBUILD", templates.Pkgbuild)
+			utils.WriteFile("PKGBUILD", templates.Pkgbuild)
 
-		// DEVOPS
+		// // DEVOPS
 		case "compose-gitea":
-			AppendToCompose(devops.GiteaYaml)
-			WriteFile(`gitea/gitea/templates/home.tmpl`, devops.GiteaHomeTmpl)
-			WriteFile(`gitea/gitea/templates/custom/body_outer_pre.tmpl`, devops.GiteaThemeParkTmpl)
-			WriteFile(`gitea/gitea/public/css/theme-earl-grey.css`, devops.GiteaEarlGrayCss)
+			devops.GenerateGitea(mail, domain)
 		case "compose-nginx":
-			WriteFile("lego.sh", devops.LegoSh)
-			AppendToCompose(devops.NginxYaml)
-			WriteFile(`nginx/nginx.conf`, devops.NginxConf)
+			devops.GenerateNginx()
 		case "compose-pacman":
-			AppendToCompose(devops.PacmanYaml)
+			devops.GeneratePacman(mail, domain)
 		case "compose-pocketbase":
-			AppendToCompose(devops.PocketbaseYaml)
+			devops.GeneratePocketbase(mail, domain)
 		case "compose-nats":
-			AppendToCompose(devops.NatsYaml)
+			devops.GenerateNats()
 		case "compose-postgres":
-			AppendToCompose(devops.PostgresYml)
+			devops.GeneratePostgres(user, pass)
 		case "compose-redis":
-			AppendToCompose(devops.RedisYaml)
+			devops.GenerateRedis()
 		case "compose-drone":
-			AppendToCompose(devops.DroneYaml)
+			devops.GenerateDrone(mail, domain)
 		case "compose-mkdocs":
-			AppendToCompose(devops.MkDocsCompose)
-			WriteFile(`mkdocs/mkdocs.yml`, devops.MkDocsConfigYaml)
-			WriteFile(`mkdocs/docs/stylesheets/extra.css`, devops.MkDocsCss)
+			devops.GenerateMkdocs(mail, domain)
 
 		// GOLANG
 		case "go-lint":
-			WriteFile(".golangci.yml", golang.GolangCiYml)
+			gogen.GenerateGolangCi()
 		case "go-grpc":
-			WriteFile("buf.yaml", golang.BufYaml)
-			WriteFile("buf.gen.yaml", golang.BufGenYaml)
-			WriteFile("proto/v1/example.proto", golang.GrpcProto)
-			AppendToMakefile(golang.BufMake)
-			SystemCall("buf generate")
+			gogen.GenerateBuf()
 		case "go-docker":
-			WriteFile("Dockerfile", golang.Dockerfile)
-			WriteFile("docker-compose.yml", golang.DockerCompose)
+			gogen.GenerateGoDocker(repo)
 		case "go-sqlc":
-			WriteFile("sqlc.yaml", golang.SqlcYaml)
-			WriteFile("sqlc.sql", golang.SqlcSql)
-			WriteFile("migrations/0001_ini.sql", golang.GooseMigrations)
-			WriteFile("postgres/postgres.go", fmt.Sprintf(golang.PostgresGo, viper.GetString("repo")))
-			AppendToMakefile(golang.SqlcMakefile)
-			SystemCall("sqlc generate")
+			gogen.GenerateSqlc(repo)
 		case "go-redis":
-			WriteFile("redis/redis.go", golang.RedisGo)
+			gogen.GenerateRedis()
 		case "go-nats":
-			WriteFile("nats/nats.go", fmt.Sprintf(golang.NatsWrapperGo, viper.GetString("repo")))
+			gogen.GenerateNats(repo)
 		case "go-cli":
-			WriteFile("main.go", fmt.Sprintf(golang.CliMainGo, viper.GetString("repo")))
-			WriteFile("cmd/flags.go", golang.CliFlagsGo)
-			WriteFile("cmd/run.go", golang.CliRunGo)
-			WriteFile("cmd/root.go", golang.CliRootGo)
-			SystemCall("go mod init " + viper.GetString("repo"))
-			SystemCall("go mod tidy")
-
-		// UNKNOWN
+			gogen.GenerateGoCliTemplate(repo)
 		default:
 			logrus.Error("unknown arguement: ", arg)
 		}
 	}
 
-	SystemCall(`sudo chmod a+rwx -R .`)
+	utils.SystemCall(`sudo chmod a+rwx -R .`)
 
 	logrus.Info("template generation finished")
-}
-
-func WriteFile(file string, content string) {
-	PrepareDir(file)
-	err := os.WriteFile(file, []byte(content), 0o600)
-	checkErr(err)
-	logrus.Info("File generated: ", file)
-}
-
-func AppendToFile(file string, content string) {
-	PrepareDir(file)
-	f, err := os.OpenFile(file, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
-	checkErr(err)
-
-	_, err = f.WriteString(content)
-	checkErr(err)
-	logrus.Info("File modified: ", file)
-}
-
-func AppendToCompose(content string) {
-	const compose = `docker-compose.yml`
-	if _, err := os.Stat(compose); errors.Is(err, os.ErrNotExist) {
-		WriteFile(compose, "services:\n")
-	}
-	AppendToFile(compose, content)
-}
-
-func AppendToMakefile(content string) {
-	const makefile = `Makefile`
-	if _, err := os.Stat(makefile); errors.Is(err, os.ErrNotExist) {
-		WriteFile(makefile, "pwd := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))\n\n")
-	}
-	AppendToFile(makefile, content)
-}
-
-func PrepareDir(filePath string) {
-	if len(strings.Split(filePath, `/`)) != 1 {
-		splitted := strings.Split(filePath, `/`)
-		path := strings.Join(splitted[0:len(splitted)-1], `/`)
-		err := os.MkdirAll(path, os.ModePerm)
-		checkErr(err)
-	}
-}
-
-func SystemCall(cmd string) {
-	logrus.Info("Executing system call: ", cmd)
-	if os.Getenv("IN_DOCKER") != "true" {
-		cmd = "docker run --rm -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest " + cmd
-	}
-	commad := exec.Command("bash", "-c", cmd)
-	commad.Stdout = logrus.StandardLogger().Writer()
-	commad.Stderr = logrus.StandardLogger().Writer()
-	checkErr(commad.Run())
 }

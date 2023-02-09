@@ -15,7 +15,11 @@ CLI Tool for generating different project modules for templating complex systems
 with ease. Dockerized version also provides set of tools for code generation and
 linting.
 
-📃 Options you can specify under 'gen' command:
+---
+
+## Options:
+
+Options you can specify under 'gen' command:
 
 - **drone** - includes drone.yml template for project CI-CD
 - **mit** - adds MIT license to project
@@ -35,6 +39,8 @@ Compose file options:
 - **compose-pacman** - adds self-hosted pacman repository for arch packages
 - **compose-pocketbase** - adds pocketbase template to compose (self-hosted real-time backend)
 - **compose-mkdocs** - adds mkdocs with theme, custom css and some preconfigured stuff
+- **compose-kuma** - adds kuma, for tracking and visualizing services stability
+- **compose-dozzle** - adds dozzle, for for viewing services logs
 
 Go code options:
 
@@ -45,6 +51,8 @@ Go code options:
 - **go-pg** - includes pgx module in porstgres, sqlc for generation and goose for migrations
 - **go-redis** - includes redis template
 - **go-nats** - includes consumer and producer nats template
+
+---
 
 ### Installation:
 
@@ -66,7 +74,25 @@ go install dancheg97.ru/templates/gen-tools@latest
 yay -Sy gen-tools
 ```
 
+---
+
 ### Examples:
+
+```
+gen-tools gen drone gpl
+```
+
+```
+gen-tools go --repo myrepo.com/me/tool
+```
+
+```
+gen-tools infr --name Nice --domain nice.org --user admin --pass SeCReT --email he@he.org
+```
+
+```
+gen-tools infr --name Nice --domain nice.org --user admin --pass SeCReT --email he@he.org
+```
 
 - [gen-tools](README.md) - tool for generating go project templates
 

@@ -1,4 +1,14 @@
-package golang
+package gogen
+
+import "dancheg97.ru/templates/gen-tools/templates/utils"
+
+func GenerateBuf() {
+	utils.WriteFile("buf.yaml", BufYaml)
+	utils.WriteFile("buf.gen.yaml", BufGenYaml)
+	utils.WriteFile("proto/v1/example.proto", GrpcProto)
+	utils.AppendToMakefile(BufMake)
+	utils.SystemCall("buf generate")
+}
 
 const BufGenYaml = `version: v1
 plugins:

@@ -1,6 +1,17 @@
 package devops
 
-const PostgresYml = `  migrator:
+import (
+	"fmt"
+
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GeneratePostgres(name string, pass string) {
+	utils.AppendToCompose(fmt.Sprintf(PostgresYml, name, pass))
+}
+
+const PostgresYml = `
+  migrator:
     image: dangdancheg/goose:0.0.1
     volumes:
       - ./migrations:/migrations
@@ -19,8 +30,8 @@ const PostgresYml = `  migrator:
   postgres:
     image: postgres:14
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: %s
+      POSTGRES_PASSWORD: %s
       POSTGRES_DB: db
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready" ]
@@ -29,4 +40,5 @@ const PostgresYml = `  migrator:
       retries: 5
     ports:
       - 7002:5432
+
 `

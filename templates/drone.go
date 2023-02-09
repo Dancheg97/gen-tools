@@ -1,5 +1,15 @@
 package templates
 
+import (
+	"strings"
+
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GenerateDroneYml(giteaurl string) {
+	utils.WriteFile(".drone.yml", strings.ReplaceAll(DroneYml, `DMN`, giteaurl))
+}
+
 const DroneYml = `kind: pipeline
 name: default
 type: docker
@@ -20,7 +30,7 @@ steps:
       - name: docker
         path: /var/run/docker.sock
     commands:
-      - docker build -t gitea.example.org/$DRONE_REPO:latest -t gitea.example.org/$DRONE_REPO:$(date +"%m-%d-%y") .
+      - docker build -t DMN/$DRONE_REPO:latest -t DMN/$DRONE_REPO:$(date +"%m-%d-%y") .
 
   - name: push
     image: docker
@@ -31,7 +41,7 @@ steps:
       - name: docker
         path: /var/run/docker.sock
     commands:
-      - docker login -u login -p $PASS gitea.example.org
-      - docker push gitea.example.org/$DRONE_REPO:latest
-      - docker push gitea.example.org/$DRONE_REPO:$(date +"%m-%d-%y")
+      - docker login -u login -p $PASS DMN
+      - docker push DMN/$DRONE_REPO:latest
+      - docker push DMN/$DRONE_REPO:$(date +"%m-%d-%y")
 `

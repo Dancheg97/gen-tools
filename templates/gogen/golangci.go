@@ -1,4 +1,10 @@
-package golang
+package gogen
+
+import "dancheg97.ru/templates/gen-tools/templates/utils"
+
+func GenerateGolangCi() {
+	utils.WriteFile(".golangci.yml", GolangCiYml)
+}
 
 const GolangCiYml = `run:
   timeout: 3m

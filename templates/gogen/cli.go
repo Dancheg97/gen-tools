@@ -1,6 +1,21 @@
-package golang
+package gogen
 
-const CliMainGo = `package main
+import (
+	"fmt"
+
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GenerateGoCliTemplate(repo string) {
+	utils.WriteFile("main.go", fmt.Sprintf(cliMainGo, repo))
+	utils.WriteFile("cmd/flags.go", cliFlagsGo)
+	utils.WriteFile("cmd/run.go", cliRunGo)
+	utils.WriteFile("cmd/root.go", cliRootGo)
+	utils.SystemCall("go mod init " + repo)
+	utils.SystemCall("go mod tidy")
+}
+
+const cliMainGo = `package main
 
 import "%s/cmd"
 
@@ -9,7 +24,7 @@ func main() {
 }
 `
 
-const CliRunGo = `package cmd
+const cliRunGo = `package cmd
 
 import (
 	"github.com/spf13/cobra"
@@ -33,7 +48,7 @@ func Run(cmd *cobra.Command, args []string) {
 }
 `
 
-const CliRootGo = `package cmd
+const cliRootGo = `package cmd
 
 import (
 	"fmt"
@@ -71,7 +86,7 @@ func Execute() {
 }
 `
 
-const CliFlagsGo = `package cmd
+const cliFlagsGo = `package cmd
 
 import (
 	"fmt"

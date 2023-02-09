@@ -3,7 +3,7 @@ package devops
 import "dancheg97.ru/templates/gen-tools/templates/utils"
 
 func GenerateRedis() {
-  utils.AppendToCompose(RedisYaml)
+	utils.AppendToCompose(RedisYaml)
 }
 
 const RedisYaml = `

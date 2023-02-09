@@ -51,6 +51,7 @@ const DroneYaml = `
       - drone
 
 `
+
 const DroneNginx = `
 server {
     listen 80;

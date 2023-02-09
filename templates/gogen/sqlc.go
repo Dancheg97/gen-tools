@@ -51,6 +51,7 @@ sqlc:
 	docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest sqlc generate
 
 `
+
 const PostgresGo = `package postgres
 
 import (

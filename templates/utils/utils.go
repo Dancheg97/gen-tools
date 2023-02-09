@@ -18,7 +18,7 @@ func WriteFile(file string, content string) {
 
 func AppendToFile(file string, content string) {
 	PrepareDir(file)
-	f, err := os.OpenFile(file, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	f, err := os.OpenFile(file, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0o600)
 	checkErr(err)
 
 	_, err = f.WriteString(content)

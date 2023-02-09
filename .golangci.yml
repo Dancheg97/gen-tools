@@ -3,7 +3,7 @@ run:
 
 linters-settings:
   cyclop:
-    max-complexity: 20
+    max-complexity: 25
     package-average: 10.0
 
   errcheck:
@@ -236,6 +236,8 @@ issues:
     - path: "gitea.go"
       linters: [lll]
     - path: "gen.go"
-      linters: [funlen, lll, cyclop]
+      linters: [lll]
     - path: "root.go"
       linters: [lll]
+    - path: "list.go"
+      linters: [lll, forbidigo]

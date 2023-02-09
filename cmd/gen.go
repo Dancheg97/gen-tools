@@ -11,10 +11,9 @@ import (
 )
 
 var genCmd = &cobra.Command{
-	Use:     "gen",
-	Short:   "📃 Generate template components",
-	Run:     Gen,
-	Example: "gen-tools --repo testgen go-lint go-grpc go-docker go-sqlc go-redis go-cli go-nats",
+	Use:   "gen",
+	Short: "📃 Generate template components",
+	Run:   Gen,
 }
 
 func init() {
@@ -64,6 +63,8 @@ func Gen(cmd *cobra.Command, args []string) {
 			devops.GenerateDrone(mail, domain)
 		case "compose-mkdocs":
 			devops.GenerateMkdocs(mail, domain)
+		case "compose-kuma":
+			devops.GenerateUptimeKuma(mail, domain)
 
 		// GOLANG
 		case "go-lint":

@@ -3,10 +3,9 @@ package cmd
 import "github.com/spf13/cobra"
 
 var goCmd = &cobra.Command{
-	Use:     "go",
-	Short:   "🐋 Generate all go related components",
-	Run:     Go,
-	Example: "gen-tools go",
+	Use:   "go",
+	Short: "🐋 Generate all go related components",
+	Run:   Go,
 }
 
 func init() {

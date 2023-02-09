@@ -104,8 +104,14 @@ docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest
 docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest swag --help
 ```
 
-- [go-lego](https://github.com/swaggo/swag) - tool for generating `swagger.yaml` from code annotations.
+- [go-lego](https://github.com/go-acme/lego) - tool for obtaining sertificates from ACME.
 
 ```sh
 docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest lego --help
+```
+
+- [go-lego](https://github.com/pressly/goose) - tool for migrating database (eg postgres).
+
+```sh
+docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/templates/gen-tools:latest goose --help
 ```

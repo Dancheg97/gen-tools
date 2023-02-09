@@ -1,12 +1,16 @@
 package devops
 
-import "dancheg97.ru/templates/gen-tools/templates/utils"
+import (
+	"fmt"
+
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
 
 func GenerateMkdocs(mail string, domain string) {
 	utils.AppendToCompose(MkDocsCompose)
 	utils.WriteFile(`mkdocs/mkdocs.yml`, MkDocsConfigYaml)
 	utils.WriteFile(`mkdocs/docs/stylesheets/extra.css`, MkDocsCss)
-	utils.AppendToNginx(MkDocsNginx)
+	utils.AppendToNginx(fmt.Sprintf(MkDocsNginx, domain, domain, domain))
 	utils.AppendToCerts(mail, "docs."+domain)
 }
 

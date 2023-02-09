@@ -79,8 +79,8 @@ var flags = []Flag{
 	},
 	{
 		Cmd:         rootCmd,
-		Name:        "email",
-		Env:         "EMAIL",
+		Name:        "mail",
+		Env:         "MAIL",
 		Value:       "mail@example.com",
 		Description: "📧 email that is used for acme when obtaining certificates",
 	},

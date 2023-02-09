@@ -29,7 +29,8 @@ server {
 }
 `
 
-const GiteaYaml = `  gitea:
+const GiteaYaml = `
+  gitea:
     image: gitea/gitea:1.17.3
     container_name: gitea
     restart: unless-stopped
@@ -64,6 +65,7 @@ const GiteaYaml = `  gitea:
       - ./gitea:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+
 `
 
 const GiteaThemeParkTmpl = `{{ if .IsSigned }}

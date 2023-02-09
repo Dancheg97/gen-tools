@@ -12,7 +12,8 @@ func GeneratePacman(mail string, domain string) {
 	utils.AppendToCerts(mail, "pacman."+domain)
 }
 
-const PacmanYaml = `  pacman:
+const PacmanYaml = `
+  pacman:
     image: gitea.dancheg97.ru/dancheg97/go-pacman:latest
     container_name: pacman
     command: run
@@ -23,6 +24,7 @@ const PacmanYaml = `  pacman:
       INIT_PKGS: ttf-droid adw-gtk-theme yay
     ports:
       - 9080:9080
+
 `
 
 const PacmanNginx = `

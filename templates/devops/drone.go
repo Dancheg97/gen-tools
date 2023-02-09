@@ -12,7 +12,7 @@ func GenerateDrone(mail string, domain string) {
 	utils.AppendToCerts(mail, "drone."+domain)
 }
 
-const DroneYaml = `  
+const DroneYaml = `
   drone:
     image: drone/drone:2.15
     container_name: drone

@@ -12,7 +12,8 @@ func GeneratePocketbase(mail string, domain string) {
 	utils.AppendToCerts(mail, "pocketbase."+domain)
 }
 
-const PocketbaseYaml = `  pocketbase:
+const PocketbaseYaml = `
+  pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
     restart: unless-stopped
     volumes:
@@ -22,6 +23,7 @@ const PocketbaseYaml = `  pocketbase:
       interval: 5s
       timeout: 5s
       retries: 5
+
 `
 
 const PocketbaseNginx = `

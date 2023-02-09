@@ -18,6 +18,7 @@ const UptimeKumaCompose = `
     container_name: kuma
     volumes:
       - ./kuma:/app/data
+
 `
 
 const UptimeKumaNginx = `

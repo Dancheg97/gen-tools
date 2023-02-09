@@ -6,7 +6,8 @@ func GenerateNginx() {
 	utils.AppendToCompose(NginxYaml)
 }
 
-const NginxYaml = `  nginx:
+const NginxYaml = `
+  nginx:
     image: nginx:1.23-alpine
     container_name: nginx
     restart: unless-stopped
@@ -16,4 +17,5 @@ const NginxYaml = `  nginx:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
       - ./.lego/certificates:/certs:ro
+
 `

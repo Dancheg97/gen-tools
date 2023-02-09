@@ -6,7 +6,8 @@ func GenerateNats() {
 	utils.AppendToCompose(NatsYaml)
 }
 
-const NatsYaml = `  nats:
+const NatsYaml = `
+  nats:
     image: nats
     ports:
       - 4222:4222

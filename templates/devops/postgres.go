@@ -10,7 +10,8 @@ func GeneratePostgres(name string, pass string) {
 	utils.AppendToCompose(fmt.Sprintf(PostgresYml, name, pass))
 }
 
-const PostgresYml = `  migrator:
+const PostgresYml = `
+  migrator:
     image: dangdancheg/goose:0.0.1
     volumes:
       - ./migrations:/migrations
@@ -39,4 +40,5 @@ const PostgresYml = `  migrator:
       retries: 5
     ports:
       - 7002:5432
+
 `

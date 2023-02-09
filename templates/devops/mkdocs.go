@@ -16,6 +16,7 @@ const MkDocsCompose = `
     container_name: docs
     volumes:
       - ./mkdocs:/docs
+
 `
 
 const MkDocsNginx = `
@@ -29,7 +30,6 @@ server {
         proxy_pass http://docs:8000/;
     }
 }
-
 `
 
 const MkDocsConfigYaml = `site_name: Example name

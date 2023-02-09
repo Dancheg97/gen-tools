@@ -55,7 +55,7 @@ func AppendToCerts(mail string, domain string) {
 	if _, err := os.Stat(certs); errors.Is(err, os.ErrNotExist) {
 		WriteFile(certs, "go install github.com/go-acme/lego/v4/cmd/lego@latest\n")
 	}
-	AppendToFile(certs, "sudo lego --email="+mail+" --domains="+domain+" --http run")
+	AppendToFile(certs, "sudo lego --email="+mail+" --domains="+domain+" --http run\n")
 }
 
 func PrepareDir(filePath string) {

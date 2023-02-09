@@ -35,6 +35,8 @@ Compose file options:
 - **compose-pacman** - adds self-hosted pacman repository for arch packages
 - **compose-pocketbase** - adds pocketbase template to compose (self-hosted real-time backend)
 - **compose-mkdocs** - adds mkdocs with theme, custom css and some preconfigured stuff
+- **compose-kuma** - adds kuma, for tracking and visualizing services stability
+- **compose-dozzle** - adds dozzle, for for viewing services logs
 
 Go code options:
 

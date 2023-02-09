@@ -1,6 +1,16 @@
-package golang
+package gogen
 
-const BufGenYaml = `version: v1
+import "dancheg97.ru/templates/gen-tools/templates/utils"
+
+func GenerateBuf() {
+	utils.WriteFile("buf.yaml", bufYaml)
+	utils.WriteFile("buf.gen.yaml", bufGenYaml)
+	utils.WriteFile("proto/v1/example.proto", grpcProto)
+	utils.AppendToMakefile(bufMake)
+	utils.SystemCall("buf generate")
+}
+
+const bufGenYaml = `version: v1
 plugins:
   - plugin: go
     out: gen/pb
@@ -12,7 +22,7 @@ plugins:
       - require_unimplemented_servers=false
 `
 
-const BufYaml = `version: v1
+const bufYaml = `version: v1
 breaking:
   use:
     - FILE
@@ -20,7 +30,7 @@ lint:
   use:
     - DEFAULT`
 
-const GrpcProto = `syntax = "proto3";
+const grpcProto = `syntax = "proto3";
 package proto.v1;
 
 option go_package = "gen/go/pb";
@@ -39,7 +49,7 @@ message AddResponse {}
 
 `
 
-const BufMake = `
+const bufMake = `
 buf:
 	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf lint
 	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf format -w

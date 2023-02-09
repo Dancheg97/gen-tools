@@ -73,6 +73,34 @@ var flags = []Flag{
 		Value:       "example.com/owner/name",
 		Description: "📂 repository for go project, used in links and go mod init",
 	},
+	{
+		Cmd:         rootCmd,
+		Name:        "domain",
+		Env:         "DOMAIN",
+		Value:       "example.com",
+		Description: "🌐 web domain that is used to obtain certificates",
+	},
+	{
+		Cmd:         rootCmd,
+		Name:        "user",
+		Env:         "USER",
+		Value:       "admin",
+		Description: "🛡️ main admin user that is used for authentication",
+	},
+	{
+		Cmd:         rootCmd,
+		Name:        "password",
+		Env:         "PASSWORD",
+		Value:       "Admin%1Pass",
+		Description: "❔ password for admin account",
+	},
+	{
+		Cmd:         rootCmd,
+		Name:        "password",
+		Env:         "PASSWORD",
+		Value:       "Admin%1Pass",
+		Description: "❔ password for admin account",
+	},
 }
 
 func Execute() {

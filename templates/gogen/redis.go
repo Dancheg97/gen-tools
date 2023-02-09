@@ -1,4 +1,14 @@
-package golang
+package gogen
+
+import (
+	"dancheg97.ru/templates/gen-tools/templates/devops"
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GenerateRedis() {
+	utils.WriteFile("redis/redis.go", RedisGo)
+	utils.AppendToCompose(devops.RedisYaml)
+}
 
 const RedisGo = `package redis
 

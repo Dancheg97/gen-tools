@@ -41,3 +41,4 @@ depends_on:
   - drone
 
 `
+const DroneCert = ``

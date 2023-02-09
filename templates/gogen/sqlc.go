@@ -1,11 +1,28 @@
-package golang
+package gogen
 
-const SqlcSql = `-- name: SelectSomething :one
+import (
+	"fmt"
+
+	"dancheg97.ru/templates/gen-tools/templates/devops"
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GenerateSqlc(repo string) {
+	utils.WriteFile("sqlc.yaml", sqlcYaml)
+	utils.WriteFile("sqlc.sql", sqlcSql)
+	utils.WriteFile("migrations/0001_ini.sql", gooseMigrations)
+	utils.WriteFile("postgres/postgres.go", fmt.Sprintf(postgresGo, repo))
+	utils.AppendToMakefile(sqlcMakefile)
+	utils.AppendToCompose(devops.PostgresYml)
+	utils.SystemCall("sqlc generate")
+}
+
+const sqlcSql = `-- name: SelectSomething :one
 
 SELECT * FROM users WHERE id = $1;
 `
 
-const SqlcYaml = `version: "2"
+const sqlcYaml = `version: "2"
 sql:
   - schema: "migrations/"
     queries: "sqlc.sql"
@@ -17,7 +34,7 @@ sql:
         emit_interface: true
 `
 
-const GooseMigrations = `-- +goose Up
+const gooseMigrations = `-- +goose Up
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -29,12 +46,12 @@ CREATE TABLE users (
 DROP TABLE user;
 `
 
-const SqlcMakefile = `
+const sqlcMakefile = `
 sqlc:
 	docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest sqlc generate
 
 `
-const PostgresGo = `package postgres
+const postgresGo = `package postgres
 
 import (
 	"context"

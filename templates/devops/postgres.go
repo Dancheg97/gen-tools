@@ -1,5 +1,11 @@
 package devops
 
+import "dancheg97.ru/templates/gen-tools/templates/utils"
+
+func GeneratePostgres() {
+	utils.AppendToCompose(PostgresYml)
+}
+
 const PostgresYml = `  migrator:
     image: dangdancheg/goose:0.0.1
     volumes:

@@ -1,5 +1,9 @@
 package devops
 
+func GeneratePocketbase() {
+  
+}
+
 const PocketbaseYaml = `  pocketbase:
     image: ghcr.io/muchobien/pocketbase:latest
     restart: unless-stopped

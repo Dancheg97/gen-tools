@@ -96,10 +96,17 @@ var flags = []Flag{
 	},
 	{
 		Cmd:         rootCmd,
-		Name:        "password",
-		Env:         "PASSWORD",
-		Value:       "Admin%1Pass",
-		Description: "❔ password for admin account",
+		Name:        "email",
+		Env:         "EMAIL",
+		Value:       "mail@example.com",
+		Description: "📧 email that is used for acme when obtaining certificates",
+	},
+	{
+		Cmd:         rootCmd,
+		Name:        "gitea",
+		Env:         "GITEA",
+		Value:       "gitea.example.com",
+		Description: "🍵 gitea link, used for drone template generating",
 	},
 }
 

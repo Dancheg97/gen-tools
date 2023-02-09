@@ -1,9 +1,13 @@
 package devops
 
-import "dancheg97.ru/templates/gen-tools/templates/utils"
+import (
+	"fmt"
 
-func GeneratePostgres() {
-	utils.AppendToCompose(PostgresYml)
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GeneratePostgres(name string, pass string) {
+	utils.AppendToCompose(fmt.Sprintf(PostgresYml, name, pass))
 }
 
 const PostgresYml = `  migrator:
@@ -25,8 +29,8 @@ const PostgresYml = `  migrator:
   postgres:
     image: postgres:14
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: %s
+      POSTGRES_PASSWORD: %s
       POSTGRES_DB: db
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready" ]

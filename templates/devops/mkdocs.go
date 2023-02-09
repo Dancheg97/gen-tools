@@ -1,11 +1,35 @@
 package devops
 
+import "dancheg97.ru/templates/gen-tools/templates/utils"
+
+func GenerateMkdocs(mail string, domain string) {
+	utils.AppendToCompose(MkDocsCompose)
+	utils.WriteFile(`mkdocs/mkdocs.yml`, MkDocsConfigYaml)
+	utils.WriteFile(`mkdocs/docs/stylesheets/extra.css`, MkDocsCss)
+	utils.AppendToNginx(MkDocsNginx)
+	utils.AppendToCerts(mail, "docs."+domain)
+}
+
 const MkDocsCompose = `
   docs:
     image: squidfunk/mkdocs-material
     container_name: docs
     volumes:
       - ./mkdocs:/docs
+`
+
+const MkDocsNginx = `
+server {
+    listen 80;
+    listen 443 ssl;
+    server_name docs.%s;
+    ssl_certificate /certs/docs.%s.crt;
+    ssl_certificate_key /certs/docs.%s.key;
+    location / {
+        proxy_pass http://docs:8000/;
+    }
+}
+
 `
 
 const MkDocsConfigYaml = `site_name: Example name

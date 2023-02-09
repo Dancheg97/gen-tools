@@ -1,5 +1,11 @@
 package devops
 
+import "dancheg97.ru/templates/gen-tools/templates/utils"
+
+func GenerateNats() {
+	utils.AppendToCompose(NatsYaml)
+}
+
 const NatsYaml = `  nats:
     image: nats
     ports:

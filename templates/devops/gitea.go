@@ -1,5 +1,34 @@
 package devops
 
+import (
+	"fmt"
+
+	"dancheg97.ru/templates/gen-tools/templates/utils"
+)
+
+func GenerateGitea(mail string, domain string) {
+	utils.WriteFile(`gitea/gitea/templates/home.tmpl`, GiteaHomeTmpl)
+	utils.WriteFile(`gitea/gitea/templates/custom/body_outer_pre.tmpl`, GiteaThemeParkTmpl)
+	utils.WriteFile(`gitea/gitea/public/css/theme-earl-grey.css`, GiteaEarlGrayCss)
+	utils.AppendToCompose(fmt.Sprintf(GiteaYaml, domain, domain, domain))
+	utils.AppendToNginx(fmt.Sprintf(GiteaNginx, domain, domain, domain))
+	utils.AppendToCerts(mail, "gitea."+domain)
+}
+
+const GiteaNginx = `
+server {
+    listen 80;
+    listen 443 ssl;
+    server_name gitea.%s;
+    ssl_certificate /certs/gitea.%s.crt;
+    ssl_certificate_key /certs/gitea.%s.key;
+    client_max_body_size 500M;
+    location / {
+        proxy_pass http://gitea/;
+    }
+}
+`
+
 const GiteaYaml = `  gitea:
     image: gitea/gitea:1.17.3
     container_name: gitea
@@ -8,15 +37,14 @@ const GiteaYaml = `  gitea:
       USER_UID: 1000
       USER_GID: 1000
       GITEA__server__APP_DATA_PATH: /data/gitea
-      GITEA__server__DOMAIN: example.com
-      GITEA__server__SSH_DOMAIN: example.com
+      GITEA__server__DOMAIN: gitea.%s
+      GITEA__server__SSH_DOMAIN: gitea.%s
       GITEA__server__HTTP_PORT: 80
-      GITEA__server__ROOT_URL: https://example.com/
+      GITEA__server__ROOT_URL: https://gitea.%s/
       GITEA__server__DISABLE_SSH: false
       GITEA__server__SSH_PORT: 22
       GITEA__server__SSH_LISTEN_PORT: 22
       GITEA__server__LFS_START_SERVER: true
-      GITEA__server__LFS_JWT_SECRET: J6-A9H6vh8ELmg7br49Xxb3obmf5_gPO4Ix_qGvM7Fc
       GITEA__server__OFFLINE_MODE: false
       GITEA__ui__THEMES: gitea,arc-green,plex,aquamarine,dark,dracula,hotline,organizr,space-gray,hotpink,onedark,overseerr,nord,earl-grey
       GITEA__ui__DEFAULT_THEME: earl-grey
@@ -883,324 +911,388 @@ img[src$="/img/matrix.svg"] {
 
 const GiteaHomeTmpl = `{{template "base/head" .}}
 
-<p class="features">Freedom's web habitat</p>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@300&display=swap" rel="stylesheet">
+<p class="features">Random message</p>
 <div id="light">
     <div id="lineh1"></div>
 </div>
 <img class="logo_main" src="https://backstage.io/animations/backstage-techdocs-icon-1.gif" alt="logo of website">
 
-<p class="features_two">Welcome to my gitea (possibly with a cup of coffee)!
- <br> You are always welcome to submit a pull request or start any form of collaboration.</p>
+<p class="features_two">Welcome to gitea!
+    <br> Example message
+</p>
+
+<div class="arrow-8"></div>
+
 <div class="line"></div>
 
-
-
 <div class="choices">
-    <h1 class="LOC">Languages i use:<h1>
-            <div class="choicesTableOne">
 
-                <div class="lang_go">
-                    <a href='https://go.dev/'>
-                        <img src="https://juststickers.in/wp-content/uploads/2016/07/go-programming-language.png" />
-                    </a>
-                    <h2>GO</h2>
-                    <p>Go is an open source programming language that makes it simple to build secure, scalable
-                        systems</p>
-                </div>
+    <h1 class="dbHeadName">Some custom badges</h1>
+    <div class="choicesTable">
+        <div class="img-badge">
+            <a href='https://www.postgresql.org/'>
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png" />
+            </a>
+            <h2>PostgreSQL</h2>
+            <p>Advanced, enterprise class open source relational database that supports both SQL (relational) and JSON
+                (non-relational) querying.</p>
+        </div>
+        <div class="img-badge">
+            <a href='https://redis.io/'>
+                <img
+                    src="https://camo.githubusercontent.com/4050472d0036e02ed3805e8329474f062eac6ae847ca0ac107d4889fa778711a/68747470733a2f2f6973332d73736c2e6d7a7374617469632e636f6d2f696d6167652f7468756d622f507572706c653132342f76342f31372f63642f61322f31376364613261302d623634312d633364302d336432322d3134313730346134306565662f49636f6e2e706e672f313230307836333062622e706e67" />
+            </a>
+            <h2>Redis</h2>
+            <p>Open source (BSD licensed), in-memory data structure store, used as a database, cache, and
+                message broke</p>
+        </div>
+        <div class="img-badge">
+            <a href='https://nats.io/'>
+                <img
+                    src="https://raw.githubusercontent.com/docker-library/docs/ad703934a62fabf54452755c8486698ff6fc5cc2/nats/logo.png" />
+            </a>
+            <h2>Nats</h2>
+            <p>Neural Autonomic Transport System. Derek Collison conceived NATS as a messaging platform that
+                functions like a central nervous system.</p>
+        </div>
+        <div class="img-badge">
+            <a href='https://github.com/google/leveldb'>
+                <img src="https://cdn.freebiesupply.com/logos/large/2x/leveldb-logo-png-transparent.png" />
+            </a>
+            <h2>LevelDB</h2>
+            <p>Fast key-value storage library written at Google that provides an ordered mapping from string
+                keys to string values</p>
+        </div>
+    </div>
 
-                <div class="lang_phyton">
-                    <a href='https://www.python.org/'>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png" />
-                    </a>
-                    <h2>Python</h2>
-                    <p>Used in web applications, software development, data science, and machinery</p>
-                </div>
-
-                <div class="lang_dart">
-                    <a href='https://dart.dev/'>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png" />
-                    </a>
-                    <h2>Dart</h2>
-                    <p>Client-optimized language for fast apps on any platform</p>
-                </div>
-
-                <div class="lang_ts">
-                    <a href='https://www.typescriptlang.org/'>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/1024px-Typescript_logo_2020.svg.png" />
-                    </a>
-                    <h2>TypeScript</h2>
-                    <p>Strongly typed programming language that builds on JavaScript, giving you better tooling at
-                        any scale</p>
-                </div>
-
-            </div>
-
-            <div class="choicesTableTwo">
-
-                <div class="lang_js">
-                    <a href='https://www.javascript.com/'>
-                        <img src="https://cdn.iconscout.com/icon/free/png-256/javascript-2752148-2284965.png" />
-                    </a>
-                    <h2>JavaScript</h2>
-                    <p>One of the core technologies of the World Wide Web</p>
-                </div>
-
-                <div class="lang_bash">
-                    <a href='https://en.wikipedia.org/wiki/Bash_(Unix_shell)'>
-                        <img src="https://orion42.net/wp-content/uploads/2019/10/full_colored_dark_green42.png" />
-                    </a>
-                    <h2>Bash</h2>
-                    <p>Improved and modernized version of the command shell</p>
-                </div>
-
-            </div>
-
-            <div class="line2"></div>
-
-            <h1>Databases i use:</h1>
-            <div class="choicesTableThree">
-
-
-                <div class="db_PostgreSQL">
-                    <a href='https://www.postgresql.org/'>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png" />
-                    </a>
-                    <h2>PostgreSQL</h2>
-                    <p>Advanced, enterprise class open source relational database that supports both SQL
-                        (relational) and JSON (non-relational) querying.</p>
-                </div>
-                <div class="db_redis">
-                    <a href='https://redis.io/'>
-                        <img
-                            src="https://camo.githubusercontent.com/4050472d0036e02ed3805e8329474f062eac6ae847ca0ac107d4889fa778711a/68747470733a2f2f6973332d73736c2e6d7a7374617469632e636f6d2f696d6167652f7468756d622f507572706c653132342f76342f31372f63642f61322f31376364613261302d623634312d633364302d336432322d3134313730346134306565662f49636f6e2e706e672f313230307836333062622e706e67" />
-                    </a>
-                    <h2>Redis</h2>
-                    <p>Open source (BSD licensed), in-memory data structure store, used as a database, cache, and
-                        message broke</p>
-                </div>
-                <div class="db_nats">
-                    <a href='https://nats.io/'>
-                        <img
-                            src="https://raw.githubusercontent.com/docker-library/docs/ad703934a62fabf54452755c8486698ff6fc5cc2/nats/logo.png" />
-                    </a>
-                    <h2>Nats</h2>
-                    <p>Neural Autonomic Transport System. Derek Collison conceived NATS as a messaging platform that
-                        functions like a central nervous system.</p>
-                </div>
-                <div class="db_leveldb">
-                    <a href='https://github.com/google/leveldb'>
-                        <img src="https://cdn.freebiesupply.com/logos/large/2x/leveldb-logo-png-transparent.png" />
-                    </a>
-                    <h2>LevelDB</h2>
-                    <p>Fast key-value storage library written at Google that provides an ordered mapping from string
-                        keys to string values</p>
-                </div>
-            </div>
-
-            <div class="line2"></div>
-
-            <h1>Tools i use:</h1>
-            <div class="choicesTableFour">
-
-                <div class="tool_gitscm">
-                    <a href='https://git-scm.com/'>
-                        <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" />
-                    </a>
-                    <h2>Git SCM</h2>
-                    <p>Free and open source distributed version control system designed to handle projects with
-                        speed and efficiency</p>
-                </div>
-                <div class="tool_docker">
-                    <a href='https://www.docker.com/'>
-                        <img
-                            src="https://iconape.com/wp-content/files/fr/370801/svg/docker-icon-logo-icon-png-svg.png" />
-                    </a>
-                    <h2>Docker</h2>
-                    <p>Platform designed to help developers build, share, and run modern applications</p>
-                </div>
-                <div class="tool_graphql">
-                    <a href='https://graphql.org/'>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/2048px-GraphQL_Logo.svg.png" />
-                    </a>
-                    <h2>GraphQL</h2>
-                    <p>Provides a complete description of the data in your API</p>
-                </div>
-                <div class="tool_swagger">
-                    <a href='https://swagger.io/'>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Swagger-logo.png" />
-                    </a>
-                    <h2>Swagger</h2>
-                    <p>Allows you to describe the structure of your APIs so that machines can read them</p>
-                </div>
-                <div class="tool_grpc">
-                    <a href='https://grpc.io/'>
-                        <img src="https://urbanonsoftware.com/assets/images/posts/grpc_in_dotnet/thumbnail2.png" />
-                    </a>
-                    <h2>GRPC</h2>
-                    <p>Modern open source high performance Remote Procedure Call (RPC) framework that can run in any
-                        environment</p>
-                </div>
-
-                <div class="tool_flutter">
-                    <a href='https://flutter.dev/'>
-                        <img src="https://static.tildacdn.com/tild6634-3236-4237-b765-636562373338/flutter.svg" />
-                    </a>
-                    <h2>Flutter</h2>
-                    <p>open source framework by Google for building beautiful, natively compiled, multi-platform
-                        applications from a single codebase</p>
-                </div>
-                <div class="tool_TensorFlow">
-                    <a href='https://www.tensorflow.org/'>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Tensorflow_logo.svg/1200px-Tensorflow_logo.svg.png" />
-                    </a>
-                    <h2>TensorFlow</h2>
-                    <p>An end-to-end machine learning platform. Prepare data. Use TensorFlow tools to process and
-                        load data. Build ML models</p>
-                </div>
-
-                <div class="tool_gitea">
-                    <a href='https://gitea.io/en-us/'>
-                        <img src="https://gitea.io/images/gitea.png" />
-                    </a>
-                    <h2>Gitea</h2>
-                    <p>Forge software package for hosting software development version control using Git</p>
-                </div>
-
-            </div>
-
+    <div class="line2"></div>
 </div>
 
 
+<div class="area">
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
 <style>
+    @keyframes lineH {
+        0% {
+            width: 0%;
+        }
 
-.name_main {
-  text-align: center;
-  font-size: 32px;
-  margin-bottom: 0px;
-  margin-top: 10px;
-}
+        100% {
+            width: 100%;
+            opacity: 0;
+        }
+    }
 
-.logo_main {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
-  margin-top: 40px;
-}
+    .name_main {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 0px;
+        margin-top: 10px;
+    }
 
-.features {
-  text-align: center;
-  font-size: 35px;
-  margin-bottom: 0px;
-}
+    .logo_main {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
 
-.features_two {
-  color: rgb(167, 167, 167);
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 0px;
-}
+    .features {
+        text-align: center;
+        font-size: 80px;
+        margin-bottom: 0px;
+        font-family: "Sofia Sans", sans-serif;
+    }
 
-.choices {
-  text-align: center;
-}
+    .features_two {
+        color: rgb(167, 167, 167);
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 60px;
+        font-family: "Sofia Sans", sans-serif;
+    }
 
-.choices p {
-  text-align: center;
-  font-size: 40px;
-  margin-bottom: 0px;
-  color: rgb(167, 167, 167);
-  font-size: 25px;
-}
+    .arrow-8 {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 30px auto 80px auto;
+    }
 
-.choices img {
-  width: 68px;
-  height: 68px;
-}
+    .arrow-8:before,
+    .arrow-8:after {
+        content: '';
+        position: absolute;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        border-left: 26px solid #7cf1df;
+        border-bottom: 26px solid #7cf1df;
+        animation: arrow-8 3s linear infinite;
+    }
 
-.choices img:hover {
-  transition: all 0.1s ease-in-out;
-  transform: scale(1.2);
-}
+    .arrow-8:after {
+        animation: arrow-8 3s linear infinite -1.5s;
+    }
 
-#light {
-  position: relative;
-  top: 150px;
-}
+    @keyframes arrow-8 {
+        0% {
+            opacity: 0;
+            transform: translate(0, -53px) rotate(-45deg);
+        }
 
-h1 {
-  color: white;
-  font-family: "Sofia Sans", sans-serif;
-  font-size: 60px;
-  font-weight: normal;
-}
+        10%,
+        90% {
+            opacity: 0;
+        }
 
-.name_main {
-  text-align: center;
-  font-size: 100px;
-  margin-bottom: 0px;
-  margin-top: 20px;
-}
+        50% {
+            opacity: 1;
+            transform: translate(0, 0) rotate(-45deg);
+        }
 
-@keyframes show {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+        100% {
+            opacity: 0;
+            transform: translate(0, 53px) rotate(-45deg);
+        }
+    }
 
-.choices .choicesTableOne,
-.choicesTableTwo,
-.choicesTableThree,
-.choicesTableFour {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
+    .line {
+        border: 0;
+        height: 1px;
+        background-image: -webkit-linear-gradient(left, #7cf1df, #1d1f23, #7cf1df);
+        position: relative;
+        top: 35px;
+        animation: lineH 5s 0s infinite linear;
+    }
 
-
-.lang_go,
-.lang_phyton,
-.lang_dart,
-.lang_ts,
-.lang_js,
-.lang_c,
-.lang_bash,
-.db_PostgreSQL,
-.db_redis,
-.db_nats,
-.db_leveldb,
-.tool_gitscm,
-.tool_docker,
-.tool_graphql,
-.tool_swagger,
-.tool_grpc,
-.tool_kubernetes,
-.tool_flutter,
-.tool_TensorFlow,
-.tool_gitea,
-.tool_svelte {
-  margin-bottom: 20px;
-  max-width: 300px;
-}
+    .line2 {
+        border: 0;
+        height: 1px;
+        background-image: -webkit-linear-gradient(left, #7cf1df, #1d1f23, #7cf1df);
+        position: relative;
+        top: 10px;
+        animation: lineH 5s 0s infinite linear;
+    }
 
 
-#lineh1 {
-  position: absolute;
-  left: 0;
-  bottom: 160px;
-  height: 1px;
-  background-image: -webkit-linear-gradient(left, #7cf1df, #1d1f23, #7cf1df);
-  animation: lineH 5s 0s linear;
-}
+    .choices .dbHeadName {
+        margin-top: 100px;
+    }
 
+    .choices {
+        text-align: center;
+        font-family: "Sofia Sans", sans-serif;
+    }
+
+    .choicesTable {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .choices p {
+        text-align: center;
+        font-size: 40px;
+        margin-bottom: 0px;
+        color: rgb(167, 167, 167);
+        font-size: 25px;
+    }
+
+    .choices h2 {
+        font-size: 40px;
+        font-weight: normal;
+        color: white;
+        font-family: "Sofia Sans", sans-serif;
+    }
+
+    .choices img {
+        width: 68px;
+        height: 68px;
+    }
+
+    .choices img:hover {
+        transition: all 0.1s ease-in-out;
+        transform: scale(1.2);
+    }
+
+    #light {
+        position: relative;
+        top: 150px;
+    }
+
+    h1 {
+        color: white;
+        font-family: "Sofia Sans", sans-serif;
+        font-size: 60px;
+        font-weight: normal;
+    }
+
+    .name_main {
+        text-align: center;
+        font-size: 100px;
+        margin-bottom: 0px;
+        margin-top: 20px;
+    }
+
+    @keyframes show {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .img-badge {
+        margin-bottom: 20px;
+        max-width: 300px;
+    }
+
+
+    #lineh1 {
+        position: absolute;
+        left: 0;
+        bottom: 160px;
+        height: 1px;
+        background-image: -webkit-linear-gradient(left, #7cf1df, #1d1f23, #7cf1df);
+        animation: lineH 5s 0s linear;
+    }
+
+    /* Анимация квадратов в начале экрана */
+    .circles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1
+    }
+
+    .circles li {
+        position: absolute;
+        display: block;
+        list-style: none;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.048);
+        animation: animate 25s linear infinite;
+        bottom: -150px;
+
+    }
+
+    .circles li:nth-child(1) {
+        left: 25%;
+        width: 80px;
+        height: 80px;
+        animation-delay: 0s;
+    }
+
+
+    .circles li:nth-child(2) {
+        left: 10%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 2s;
+        animation-duration: 12s;
+    }
+
+    .circles li:nth-child(3) {
+        left: 70%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 4s;
+    }
+
+    .circles li:nth-child(4) {
+        left: 40%;
+        width: 60px;
+        height: 60px;
+        animation-delay: 0s;
+        animation-duration: 18s;
+    }
+
+    .circles li:nth-child(5) {
+        left: 65%;
+        width: 20px;
+        height: 20px;
+        animation-delay: 0s;
+    }
+
+    .circles li:nth-child(6) {
+        left: 75%;
+        width: 110px;
+        height: 110px;
+        animation-delay: 3s;
+    }
+
+    .circles li:nth-child(7) {
+        left: 35%;
+        width: 150px;
+        height: 150px;
+        animation-delay: 7s;
+    }
+
+    .circles li:nth-child(8) {
+        left: 50%;
+        width: 25px;
+        height: 25px;
+        animation-delay: 15s;
+        animation-duration: 45s;
+    }
+
+    .circles li:nth-child(9) {
+        left: 20%;
+        width: 15px;
+        height: 15px;
+        animation-delay: 2s;
+        animation-duration: 35s;
+    }
+
+    .circles li:nth-child(10) {
+        left: 85%;
+        width: 150px;
+        height: 150px;
+        animation-delay: 0s;
+        animation-duration: 11s;
+    }
+
+
+
+    @keyframes animate {
+
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+            border-radius: 0;
+        }
+
+        100% {
+            transform: translateY(-1000px) rotate(720deg);
+            opacity: 0;
+            border-radius: 50%;
+        }
+    }
 </style>
 
 

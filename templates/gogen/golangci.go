@@ -3,10 +3,10 @@ package gogen
 import "dancheg97.ru/templates/gen-tools/templates/utils"
 
 func GenerateGolangCi() {
-	utils.WriteFile(".golangci.yml", golangCiYml)
+	utils.WriteFile(".golangci.yml", GolangCiYml)
 }
 
-const golangCiYml = `run:
+const GolangCiYml = `run:
   timeout: 3m
 
 linters-settings:

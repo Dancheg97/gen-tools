@@ -173,15 +173,6 @@ func checkErr(err error) {
 	}
 }
 
-// Included with:
-//
-//	{
-//		Cmd:         rootCmd,
-//		Name:        "logs-fmt",
-//		Env:         "LOGS_FMT",
-//		Value:       "json",
-//		Description: "📒 output format for logs",
-//	}
 func setLogFormat() {
 	switch viper.GetString("logs-fmt") {
 	case "json":

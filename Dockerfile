@@ -21,11 +21,7 @@ RUN git clone https://aur.archlinux.org/yay.git \
     && cd \
     && rm -rf .cache yay
 
-RUN yay -Sy --noconfirm golangci-lint
-RUN yay -Sy --noconfirm protoc-gen-go
-RUN yay -Sy --noconfirm protoc-gen-go-grpc
-RUN yay -Sy --noconfirm buf
-RUN yay -Sy --noconfirm sqlc
+RUN yay -Sy --noconfirm golangci-lint protoc-gen-go protoc-gen-go-grpc buf sqlc
 
 RUN go install mvdan.cc/gofumpt@latest
 RUN go install github.com/swaggo/swag/cmd/swag@v1.8.7

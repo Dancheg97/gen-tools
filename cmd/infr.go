@@ -28,3 +28,9 @@ func Infr(cmd *cobra.Command, args []string) {
 	logrus.Info("to obtain certificates run: sh certs.sh")
 	logrus.Info("to run infrastructure run: docker compose up")
 }
+
+func WarnDefault(actual string, initial string) {
+	// if actual == initial {
+
+	// }
+}

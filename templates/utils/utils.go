@@ -75,7 +75,10 @@ func SystemCall(cmd string) {
 	commad := exec.Command("bash", "-c", cmd)
 	commad.Stdout = logrus.StandardLogger().Writer()
 	commad.Stderr = logrus.StandardLogger().Writer()
-	checkErr(commad.Run())
+	err := commad.Run()
+	if err != nil {
+		logrus.Error(`unable to execute system call: `, err)
+	}
 }
 
 func checkErr(err error) {

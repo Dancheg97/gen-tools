@@ -19,6 +19,12 @@ linting.
 
 ## Options:
 
+To get full list of actual features run:
+
+```sh
+gen-tools -h
+```
+
 Options you can specify under 'gen' command:
 
 - **drone** - includes drone.yml template for project CI-CD

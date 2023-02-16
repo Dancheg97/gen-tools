@@ -27,11 +27,12 @@ func Gen(cmd *cobra.Command, args []string) {
 	user := viper.GetString(`user`)
 	pass := viper.GetString(`pass`)
 	gitea := viper.GetString(`gitea`)
+	generate := viper.GetBool(`generate`)
 
 	setLogFormat()
 
 	for _, arg := range args {
-		processArguement(repo, mail, domain, user, pass, gitea, arg)
+		processArguement(repo, mail, domain, user, pass, gitea, arg, generate)
 	}
 
 	utils.SystemCall(`sudo chmod a+rwx -R .`)
@@ -39,7 +40,7 @@ func Gen(cmd *cobra.Command, args []string) {
 	logrus.Info("template generation finished")
 }
 
-func processArguement(repo, mail, domain, user, pass, gitea, arg string) {
+func processArguement(repo, mail, domain, user, pass, gitea, arg string, gen bool) {
 	switch arg {
 	case "drone":
 		templates.GenerateDroneYml(gitea)
@@ -74,11 +75,11 @@ func processArguement(repo, mail, domain, user, pass, gitea, arg string) {
 	case "go-lint":
 		gogen.GenerateGolangCi()
 	case "go-grpc":
-		gogen.GenerateBuf()
+		gogen.GenerateBuf(gen)
 	case "go-docker":
 		gogen.GenerateGoDocker(repo)
 	case "go-sqlc":
-		gogen.GenerateSqlc(repo)
+		gogen.GenerateSqlc(repo, gen)
 	case "go-redis":
 		gogen.GenerateRedis()
 	case "go-nats":

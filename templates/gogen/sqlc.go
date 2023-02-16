@@ -7,14 +7,16 @@ import (
 	"dancheg97.ru/templates/gen-tools/templates/utils"
 )
 
-func GenerateSqlc(repo string) {
+func GenerateSqlc(repo string, generate bool) {
 	utils.WriteFile("sqlc.yaml", SqlcYaml)
 	utils.WriteFile("sqlc.sql", SqlcSql)
 	utils.WriteFile("migrations/0001_ini.sql", GooseMigrations)
 	utils.WriteFile("postgres/postgres.go", fmt.Sprintf(PostgresGo, repo))
 	utils.AppendToMakefile(SqlcMakefile)
 	utils.AppendToCompose(devops.PostgresYml)
-	utils.SystemCall("sqlc generate")
+	if generate {
+		utils.SystemCall("sqlc generate")
+	}
 }
 
 const SqlcSql = `-- name: SelectSomething :one

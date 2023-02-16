@@ -43,7 +43,7 @@ var flags = []Flag{
 		ShortName:   "r",
 		Env:         "REPO",
 		Value:       "example.com/owner/name",
-		Description: "📂 repository for go project, used in links and go mod init",
+		Description: "📂 repository for go project, used in refs and go mod init",
 	},
 	{
 		Cmd:         rootCmd,

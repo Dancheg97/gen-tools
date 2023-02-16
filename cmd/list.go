@@ -8,7 +8,7 @@ import (
 
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "🎚️ Get a list of all available tools",
+	Short: "📑 Get a list of all available tools",
 	Run:   List,
 }
 

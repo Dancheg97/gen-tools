@@ -10,10 +10,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "gen-tools",
 	Short: "🧰 Tool for generating project templates written in go.",
-	Long: `🧰 CLI Tool for generating different project modules for templating
-complex systems with ease.
-
-	LICENSE
+	Long: `🧰 CLI Tool for generating different project modules for templating complex systems with ease.
 
 	gen-tools  Copyright (C) 2023  Dancheg97
 	
@@ -28,16 +25,6 @@ complex systems with ease.
 	gen-tools infr - generate compose with infrastructure
 	gen-tools list - list possible options for generation
 
-Examples:
-
-gen-tools gen drone gpl
-
-gen-tools go --repo myrepo.com/me/tool
-
-gen-tools infr --name Nice --domain nice.org --user admin --pass SeCReT --email he@he.org
-
-gen-tools infr --name Nice --domain nice.org --user admin --pass SeCReT --email he@he.org
-
 `,
 }
 
@@ -45,6 +32,7 @@ var flags = []Flag{
 	{
 		Cmd:         rootCmd,
 		Name:        "name",
+		ShortName:   "n",
 		Env:         "NAME",
 		Value:       "Project",
 		Description: "📜 project name, used in devops overrides",
@@ -52,13 +40,15 @@ var flags = []Flag{
 	{
 		Cmd:         rootCmd,
 		Name:        "repo",
+		ShortName:   "r",
 		Env:         "REPO",
 		Value:       "example.com/owner/name",
-		Description: "📂 repository for go project, used in links and go mod init",
+		Description: "📂 repository for go project, used in refs and go mod init",
 	},
 	{
 		Cmd:         rootCmd,
 		Name:        "domain",
+		ShortName:   "d",
 		Env:         "DOMAIN",
 		Value:       "example.com",
 		Description: "🌐 web domain that is used to obtain certificates",
@@ -66,13 +56,15 @@ var flags = []Flag{
 	{
 		Cmd:         rootCmd,
 		Name:        "user",
+		ShortName:   "u",
 		Env:         "USER",
 		Value:       "admin",
-		Description: "🛡️ main admin user that is used for authentication",
+		Description: "🛡️  main admin user that is used for authentication",
 	},
 	{
 		Cmd:         rootCmd,
 		Name:        "pass",
+		ShortName:   "p",
 		Env:         "PASS",
 		Value:       "Admin%1Pass",
 		Description: "❔ password for admin account",
@@ -80,6 +72,7 @@ var flags = []Flag{
 	{
 		Cmd:         rootCmd,
 		Name:        "mail",
+		ShortName:   "m",
 		Env:         "MAIL",
 		Value:       "mail@example.com",
 		Description: "📧 email that is used for acme when obtaining certificates",
@@ -87,9 +80,19 @@ var flags = []Flag{
 	{
 		Cmd:         rootCmd,
 		Name:        "gitea",
+		ShortName:   "g",
 		Env:         "GITEA",
 		Value:       "gitea.example.com",
 		Description: "🍵 gitea link, used for drone template generating",
+	},
+	{
+		Cmd:         rootCmd,
+		Name:        "generate",
+		Env:         "GENERATE",
+		Value:       "true",
+		IsRequired:  false,
+		Type:        "bool",
+		Description: "📃 wether generation commands (buf/sqlc) would be activated",
 	},
 }
 

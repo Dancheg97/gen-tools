@@ -1,5 +1,5 @@
 <p align="center">
-<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="https://dancheg97.ru/repo-avatars/67-4297f15da3e76c29478ec89973007622" />
+<img style="align: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;" width="238px" height="238px" src="./logo.png" />
 </p>
 
 <h2 align="center">Template generation tools</h2>
@@ -18,6 +18,12 @@ linting.
 ---
 
 ## Options:
+
+To get full list of actual features run:
+
+```sh
+gen-tools -h
+```
 
 Options you can specify under 'gen' command:
 

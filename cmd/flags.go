@@ -90,14 +90,12 @@ func setLogFormat() {
 	case "json":
 		logrus.SetFormatter(&logrus.JSONFormatter{})
 	case "text":
-		logrus.SetFormatter(&logrus.TextFormatter{})
-	case "pretty":
 		logrus.SetFormatter(&logrus.TextFormatter{
-			ForceColors:      true,
-			DisableQuote:     true,
+			DisableColors:    true,
 			DisableTimestamp: true,
+			DisableQuote:     true,
 		})
-	default:
+	case "colored":
 		logrus.SetFormatter(&logrus.TextFormatter{
 			ForceColors:      true,
 			DisableQuote:     true,

@@ -21,6 +21,8 @@ func init() {
 }
 
 func Gen(cmd *cobra.Command, args []string) {
+	setLogFormat()
+
 	repo := viper.GetString(`repo`)
 	mail := viper.GetString(`mail`)
 	domain := viper.GetString(`domain`)
@@ -28,8 +30,6 @@ func Gen(cmd *cobra.Command, args []string) {
 	pass := viper.GetString(`pass`)
 	gitea := viper.GetString(`gitea`)
 	generate := viper.GetBool(`generate`)
-
-	setLogFormat()
 
 	for _, arg := range args {
 		processArguement(repo, mail, domain, user, pass, gitea, arg, generate)

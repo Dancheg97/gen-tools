@@ -24,11 +24,19 @@ var rootCmd = &cobra.Command{
 var flags = []Flag{
 	{
 		Cmd:         rootCmd,
+		Name:        "logs-fmt",
+		ShortName:   "l",
+		Env:         "LOGS_FMT",
+		Value:       "colored",
+		Description: "📝 logs output format (text/colored/json)",
+	},
+	{
+		Cmd:         rootCmd,
 		Name:        "name",
 		ShortName:   "n",
 		Env:         "NAME",
 		Value:       "Project",
-		Description: "📜 project name, used in devops overrides",
+		Description: "🏷️  project name, used in compose overrides",
 	},
 	{
 		Cmd:         rootCmd,
@@ -36,7 +44,7 @@ var flags = []Flag{
 		ShortName:   "r",
 		Env:         "REPO",
 		Value:       "example.com/owner/name",
-		Description: "📂 repository for go project, used in refs and go mod init",
+		Description: "📂 repository for go project, used in go mod init",
 	},
 	{
 		Cmd:         rootCmd,
@@ -52,7 +60,7 @@ var flags = []Flag{
 		ShortName:   "u",
 		Env:         "USER",
 		Value:       "admin",
-		Description: "🛡️  main admin user that is used for authentication",
+		Description: "🛡️  admin user that is used for authentication",
 	},
 	{
 		Cmd:         rootCmd,

@@ -37,7 +37,6 @@ func Infr(cmd *cobra.Command, args []string) {
 }
 
 func PreventDefault(name string, actual string, initial string) {
-	logrus.Warn(name, actual, initial)
 	if actual == initial {
 		logrus.Error(name + " was not applied, value is: " + actual)
 		os.Exit(1)

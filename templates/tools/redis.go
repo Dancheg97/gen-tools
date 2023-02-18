@@ -1,13 +1,13 @@
-package gogen
+package tools
 
 import (
-	"dancheg97.ru/dancheg97/gen-tools/templates/devops"
-	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates/services"
+	"dancheg97.ru/dancheg97/gen-tools/utils"
 )
 
 func GenerateRedis() {
 	utils.WriteFile("redis/redis.go", RedisGo)
-	utils.AppendToCompose(devops.RedisYaml)
+	utils.AppendToCompose(services.RedisYaml)
 }
 
 const RedisGo = `package redis

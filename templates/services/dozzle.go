@@ -1,9 +1,9 @@
-package devops
+package services
 
 import (
 	"fmt"
 
-	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/utils"
 )
 
 func GenerateDozzle(mail string, domain string, user string, pass string) {

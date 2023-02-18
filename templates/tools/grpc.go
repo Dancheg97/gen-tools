@@ -1,6 +1,6 @@
-package gogen
+package tools
 
-import "dancheg97.ru/dancheg97/gen-tools/templates/utils"
+import "dancheg97.ru/dancheg97/gen-tools/utils"
 
 func GenerateBuf(generate bool) {
 	utils.WriteFile("buf.yaml", BufYaml)

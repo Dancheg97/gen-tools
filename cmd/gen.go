@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"dancheg97.ru/dancheg97/gen-tools/templates"
-	"dancheg97.ru/dancheg97/gen-tools/templates/devops"
-	"dancheg97.ru/dancheg97/gen-tools/templates/gogen"
-	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates/services"
+	"dancheg97.ru/dancheg97/gen-tools/templates/tools"
+	"dancheg97.ru/dancheg97/gen-tools/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -53,41 +53,41 @@ func processArguement(repo, mail, domain, user, pass, gitea, arg string, gen boo
 	case "pkgbuild":
 		utils.WriteFile("PKGBUILD", templates.Pkgbuild)
 	case "compose-gitea":
-		devops.GenerateGitea(mail, domain)
+		services.GenerateGitea(mail, domain)
 	case "compose-nginx":
-		devops.GenerateNginx()
+		services.GenerateNginx()
 	case "compose-pacman":
-		devops.GeneratePacman(mail, domain)
+		services.GeneratePacman(mail, domain)
 	case "compose-pocketbase":
-		devops.GeneratePocketbase(mail, domain)
+		services.GeneratePocketbase(mail, domain)
 	case "compose-nats":
-		devops.GenerateNats()
+		services.GenerateNats()
 	case "compose-postgres":
-		devops.GeneratePostgres(user, pass)
+		services.GeneratePostgres(user, pass)
 	case "compose-redis":
-		devops.GenerateRedis()
+		services.GenerateRedis()
 	case "compose-drone":
-		devops.GenerateDrone(mail, domain)
+		services.GenerateDrone(mail, domain)
 	case "compose-mkdocs":
-		devops.GenerateMkdocs(mail, domain)
+		services.GenerateMkdocs(mail, domain)
 	case "compose-kuma":
-		devops.GenerateUptimeKuma(mail, domain)
+		services.GenerateUptimeKuma(mail, domain)
 	case "compose-dozzle":
-		devops.GenerateDozzle(mail, domain, user, pass)
+		services.GenerateDozzle(mail, domain, user, pass)
 	case "go-lint":
-		gogen.GenerateGolangCi()
+		tools.GenerateGolangCi()
 	case "go-grpc":
-		gogen.GenerateBuf(gen)
+		tools.GenerateBuf(gen)
 	case "go-docker":
-		gogen.GenerateGoDocker(repo)
+		tools.GenerateGoDocker(repo)
 	case "go-sqlc":
-		gogen.GenerateSqlc(repo, gen)
+		tools.GenerateSqlc(repo, gen)
 	case "go-redis":
-		gogen.GenerateRedis()
+		tools.GenerateRedis()
 	case "go-nats":
-		gogen.GenerateNats(repo)
+		tools.GenerateNats(repo)
 	case "go-cli":
-		gogen.GenerateGoCliTemplate(repo)
+		tools.GenerateGoCliTemplate(repo)
 	default:
 		logrus.Error("unknown arguement: ", arg)
 	}

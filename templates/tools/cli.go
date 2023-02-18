@@ -1,9 +1,9 @@
-package gogen
+package tools
 
 import (
 	"fmt"
 
-	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/utils"
 )
 
 func GenerateGoCliTemplate(repo string) {

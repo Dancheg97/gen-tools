@@ -18,13 +18,6 @@ var rootCmd = &cobra.Command{
 	This is free software, and you are welcome to redistribute it
 	under certain conditions; watch license in repo for details.
 
-📃 You can get started with following commands:
-
-	gen-tools gen [args] - generate component
-	gen-tools go - generate go project
-	gen-tools infr - generate compose with infrastructure
-	gen-tools list - list possible options for generation
-
 `,
 }
 

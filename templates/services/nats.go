@@ -1,6 +1,6 @@
-package devops
+package services
 
-import "dancheg97.ru/dancheg97/gen-tools/templates/utils"
+import "dancheg97.ru/dancheg97/gen-tools/utils"
 
 func GenerateNats() {
 	utils.AppendToCompose(NatsYaml)

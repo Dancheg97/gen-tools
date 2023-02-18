@@ -1,15 +1,15 @@
-package gogen
+package tools
 
 import (
 	"fmt"
 
-	"dancheg97.ru/dancheg97/gen-tools/templates/devops"
-	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates/services"
+	"dancheg97.ru/dancheg97/gen-tools/utils"
 )
 
 func GenerateNats(repo string) {
 	utils.WriteFile("nats/nats.go", fmt.Sprintf(NatsWrapperGo, repo))
-	utils.AppendToCompose(devops.NatsYaml)
+	utils.AppendToCompose(services.NatsYaml)
 }
 
 const NatsWrapperGo = `package nats

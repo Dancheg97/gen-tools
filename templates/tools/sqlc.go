@@ -1,10 +1,10 @@
-package gogen
+package tools
 
 import (
 	"fmt"
 
-	"dancheg97.ru/dancheg97/gen-tools/templates/devops"
-	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates/services"
+	"dancheg97.ru/dancheg97/gen-tools/utils"
 )
 
 func GenerateSqlc(repo string, generate bool) {
@@ -13,7 +13,7 @@ func GenerateSqlc(repo string, generate bool) {
 	utils.WriteFile("migrations/0001_ini.sql", GooseMigrations)
 	utils.WriteFile("postgres/postgres.go", fmt.Sprintf(PostgresGo, repo))
 	utils.AppendToMakefile(SqlcMakefile)
-	utils.AppendToCompose(devops.PostgresYml)
+	utils.AppendToCompose(services.PostgresYml)
 	if generate {
 		utils.SystemCall("sqlc generate")
 	}

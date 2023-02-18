@@ -12,7 +12,7 @@ import (
 
 var genCmd = &cobra.Command{
 	Use:   "gen",
-	Short: "📃 Generate template components",
+	Short: "🧰 Generate template components",
 	Run:   Gen,
 }
 
@@ -72,6 +72,8 @@ func processArguement(repo, mail, domain, user, pass, gitea, arg string, gen boo
 		devops.GenerateMkdocs(mail, domain)
 	case "compose-kuma":
 		devops.GenerateUptimeKuma(mail, domain)
+	case "compose-dozzle":
+		devops.GenerateDozzle(mail, domain, user, pass)
 	case "go-lint":
 		gogen.GenerateGolangCi()
 	case "go-grpc":

@@ -66,7 +66,7 @@ var flags = []Flag{
 		Name:        "pass",
 		ShortName:   "p",
 		Env:         "PASS",
-		Value:       "Admin%1Pass",
+		Value:       "password",
 		Description: "❔ password for admin account",
 	},
 	{

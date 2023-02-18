@@ -9,7 +9,7 @@ import (
 func GenerateDozzle(mail string, domain string, user string, pass string) {
 	utils.AppendToCompose(fmt.Sprintf(DozzleYaml, user, pass))
 	utils.AppendToNginx(fmt.Sprintf(DozzleNginx, domain, domain, domain))
-	utils.AppendToCerts(mail, "drone."+domain)
+	utils.AppendToCerts(mail, "dozzle."+domain)
 }
 
 const DozzleNginx = `

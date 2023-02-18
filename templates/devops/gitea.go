@@ -3,7 +3,7 @@ package devops
 import (
 	"fmt"
 
-	"dancheg97.ru/templates/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
 )
 
 func GenerateGitea(mail string, domain string) {

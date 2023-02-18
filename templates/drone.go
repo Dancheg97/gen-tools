@@ -3,7 +3,7 @@ package templates
 import (
 	"strings"
 
-	"dancheg97.ru/templates/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
 )
 
 func GenerateDroneYml(giteaurl string) {

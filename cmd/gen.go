@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"dancheg97.ru/templates/gen-tools/templates"
-	"dancheg97.ru/templates/gen-tools/templates/devops"
-	"dancheg97.ru/templates/gen-tools/templates/gogen"
-	"dancheg97.ru/templates/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates"
+	"dancheg97.ru/dancheg97/gen-tools/templates/devops"
+	"dancheg97.ru/dancheg97/gen-tools/templates/gogen"
+	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

@@ -3,8 +3,8 @@ package gogen
 import (
 	"fmt"
 
-	"dancheg97.ru/templates/gen-tools/templates/devops"
-	"dancheg97.ru/templates/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates/devops"
+	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
 )
 
 func GenerateSqlc(repo string, generate bool) {
@@ -50,7 +50,7 @@ DROP TABLE user;
 
 const SqlcMakefile = `
 sqlc:
-	docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/templates/gen-tools:latest sqlc generate
+	docker run --rm -it -v ${pwd}:/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest sqlc generate
 
 `
 

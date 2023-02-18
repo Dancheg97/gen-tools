@@ -1,6 +1,6 @@
 package devops
 
-import "dancheg97.ru/templates/gen-tools/templates/utils"
+import "dancheg97.ru/dancheg97/gen-tools/templates/utils"
 
 func GenerateRedis() {
 	utils.AppendToCompose(RedisYaml)

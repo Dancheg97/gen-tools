@@ -1,6 +1,6 @@
 package gogen
 
-import "dancheg97.ru/templates/gen-tools/templates/utils"
+import "dancheg97.ru/dancheg97/gen-tools/templates/utils"
 
 func GenerateBuf(generate bool) {
 	utils.WriteFile("buf.yaml", BufYaml)
@@ -53,8 +53,8 @@ message AddResponse {}
 
 const BufMake = `
 buf:
-	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf lint
-	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf format -w
-	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/templates/gen-tools:latest buf generate
+	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/dancheg97/gen-tools:latest buf lint
+	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/dancheg97/gen-tools:latest buf format -w
+	docker run --rm -v ${pwd}:/src -w /src dancheg97.ru/dancheg97/gen-tools:latest buf generate
 
 `

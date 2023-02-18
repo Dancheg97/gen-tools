@@ -3,8 +3,8 @@ package gogen
 import (
 	"fmt"
 
-	"dancheg97.ru/templates/gen-tools/templates/devops"
-	"dancheg97.ru/templates/gen-tools/templates/utils"
+	"dancheg97.ru/dancheg97/gen-tools/templates/devops"
+	"dancheg97.ru/dancheg97/gen-tools/templates/utils"
 )
 
 func GenerateNats(repo string) {

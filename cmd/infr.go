@@ -10,7 +10,7 @@ import (
 
 var infraCmd = &cobra.Command{
 	Use:   "infr",
-	Short: "🐋 Generate all infrastructure in single command",
+	Short: "🐳 Generate all infrastructure in single command",
 	Run:   Infr,
 }
 

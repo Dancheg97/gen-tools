@@ -3,6 +3,7 @@ package cmd
 import (
 	"os"
 
+	"dancheg97.ru/dancheg97/gen-tools/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -32,7 +33,12 @@ func Infr(cmd *cobra.Command, args []string) {
 		"compose-kuma",
 		"compose-dozzle",
 	})
-	logrus.Info("to obtain certificates run: sh certs.sh")
+
+	logrus.Info("Obtaining certificates")
+	utils.SystemCall(`sh certs.sh`)
+
+	logrus.Info("Generating gitea/mkdocs logo")
+
 	logrus.Info("to run infrastructure run: docker compose up")
 }
 

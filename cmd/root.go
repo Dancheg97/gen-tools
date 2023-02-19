@@ -95,6 +95,12 @@ var flags = []Flag{
 		Type:        "bool",
 		Description: "📃 wether generation commands (buf/sqlc) would be activated",
 	},
+	{
+		Cmd:         rootCmd,
+		Name:        "logo",
+		Env:         "LOGO",
+		Description: "🔖 path for .svg logo, will be used in gitea and mkdocs",
+	},
 }
 
 func Execute() {

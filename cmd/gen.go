@@ -16,6 +16,17 @@ var genCmd = &cobra.Command{
 	Run:   Gen,
 }
 
+var (
+	repo   string
+	mail   string
+	domain string
+	user   string
+	pass   string
+	gitea  string
+	logo   string
+	gen    bool
+)
+
 func init() {
 	rootCmd.AddCommand(genCmd)
 }
@@ -23,16 +34,17 @@ func init() {
 func Gen(cmd *cobra.Command, args []string) {
 	setLogFormat()
 
-	repo := viper.GetString(`repo`)
-	mail := viper.GetString(`mail`)
-	domain := viper.GetString(`domain`)
-	user := viper.GetString(`user`)
-	pass := viper.GetString(`pass`)
-	gitea := viper.GetString(`gitea`)
-	generate := viper.GetBool(`generate`)
+	repo = viper.GetString(`repo`)
+	mail = viper.GetString(`mail`)
+	domain = viper.GetString(`domain`)
+	user = viper.GetString(`user`)
+	pass = viper.GetString(`pass`)
+	gitea = viper.GetString(`gitea`)
+	gen = viper.GetBool(`generate`)
+	logo = viper.GetString(`logo`)
 
 	for _, arg := range args {
-		processArguement(repo, mail, domain, user, pass, gitea, arg, generate)
+		processArguement(arg)
 	}
 
 	utils.SystemCall(`sudo chmod a+rwx -R .`)
@@ -40,7 +52,7 @@ func Gen(cmd *cobra.Command, args []string) {
 	logrus.Info("template generation finished")
 }
 
-func processArguement(repo, mail, domain, user, pass, gitea, arg string, gen bool) {
+func processArguement(arg string) {
 	switch arg {
 	case "drone":
 		templates.GenerateDroneYml(gitea)
@@ -53,7 +65,7 @@ func processArguement(repo, mail, domain, user, pass, gitea, arg string, gen boo
 	case "pkgbuild":
 		utils.WriteFile("PKGBUILD", templates.Pkgbuild)
 	case "compose-gitea":
-		services.GenerateGitea(mail, domain)
+		services.GenerateGitea(mail, domain, logo)
 	case "compose-nginx":
 		services.GenerateNginx()
 	case "compose-pacman":

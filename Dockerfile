@@ -1,7 +1,7 @@
 FROM archlinux/archlinux:base-devel
 LABEL maintainer="Dancheg97 <dangdancheg@gmail.com>"
 ENV IN_DOCKER=true
-RUN pacman -Syu --needed --noconfirm git go
+RUN pacman -Syu --needed --noconfirm git go npm
 ENV PATH="${PATH}:/home/makepkg/go/bin"
 RUN chmod a+rwx -R /var/cache/pacman/pkg
 ARG user=makepkg
@@ -21,5 +21,6 @@ RUN go install github.com/go-swagger/go-swagger/cmd/swagger@latest
 RUN go install github.com/go-acme/lego/v4/cmd/lego@latest
 RUN go install github.com/pressly/goose/v3/cmd/goose@latest
 RUN go install dancheg97.ru/dancheg97/gen-tools@latest
+RUN npm install --no-save --no-package-lock fabric@5 imagemin-zopfli@7
 USER root
 COPY . .

@@ -47,8 +47,6 @@ func Gen(cmd *cobra.Command, args []string) {
 		processArguement(arg)
 	}
 
-	utils.SystemCall(`sudo chmod a+rwx -R .`)
-
 	logrus.Info("template generation finished")
 }
 

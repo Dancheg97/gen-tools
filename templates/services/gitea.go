@@ -22,11 +22,7 @@ func GenerateGiteaLogo(logo string) {
 		logrus.Info(`no gitea logo provided, using default logo`)
 		return
 	}
-	err := utils.SystemCall(`node --version`)
-	utils.CheckErr(err)
-	err = utils.SystemCall(`npm install --no-save --no-package-lock fabric@5 imagemin-zopfli@7`)
-	utils.CheckErr(err)
-	err = utils.CopyFile(logo, `logo.svg`)
+	err := utils.CopyFile(logo, `logo.svg`)
 	utils.CheckErr(err)
 
 	utils.WriteFile(`logo-generator-gitea.js`, GiteaLogoGenerator)

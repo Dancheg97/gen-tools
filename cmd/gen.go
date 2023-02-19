@@ -10,13 +10,13 @@ import (
 	"github.com/spf13/viper"
 )
 
-var genCmd = &cobra.Command{
-	Use:   "gen",
-	Short: "🧰 Generate template components",
-	Run:   Gen,
-}
-
 var (
+	genCmd = &cobra.Command{
+		Use:   "gen",
+		Short: "🧰 Generate template components",
+		Run:   Gen,
+	}
+
 	repo   string
 	mail   string
 	domain string

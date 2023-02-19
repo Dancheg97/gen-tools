@@ -69,10 +69,6 @@ func PrepareDir(filePath string) {
 
 func SystemCall(cmd string) error {
 	logrus.Info("Executing system call: ", cmd)
-	if os.Getenv("IN_DOCKER") != "true" {
-		cmd = "docker run -p 80:80 -p 443:443 --rm -v $(pwd):/wd -w /wd " +
-			"dancheg97.ru/dancheg97/gen-tools:latest " + cmd
-	}
 	commad := exec.Command("bash", "-c", cmd)
 	commad.Stdout = logrus.StandardLogger().Writer()
 	commad.Stderr = logrus.StandardLogger().Writer()

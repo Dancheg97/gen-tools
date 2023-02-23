@@ -18,7 +18,8 @@ func SvgToPng(inp, outp string, w, h int) {
 	in, err := os.Open(inp)
 	utils.CheckErr(err)
 
-	icon, _ := oksvg.ReadIconStream(in)
+	icon, err := oksvg.ReadIconStream(in)
+	utils.CheckErr(err)
 	icon.SetTarget(0, 0, float64(w), float64(h))
 	rgba := image.NewRGBA(image.Rect(0, 0, w, h))
 	icon.Draw(rasterx.NewDasher(w, h, rasterx.NewScannerGV(w, h, rgba, rgba.Bounds())), 1)

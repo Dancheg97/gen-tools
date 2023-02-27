@@ -53,8 +53,6 @@ func processArguement(arg string) {
 	switch arg {
 	case "drone":
 		templates.GenerateDroneYml(gitea)
-	case "make":
-		utils.WriteFile("Makefile", templates.Makefile)
 	case "license-gpl":
 		utils.WriteFile("LICENSE", licenses.GPLv3)
 	case "license-mit":

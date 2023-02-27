@@ -28,11 +28,13 @@ gen-tools -h
 🧰 Options you can specify under 'gen' command:
 
 - **drone** - includes drone.yml template for project CI-CD
-- **mit** - adds MIT license to project
-- **gpl** - adds GPLv3 license to project
-- **make** - adds Makefile to project
 - **pkgbuild** - arch format PKGBUILD for packaging to AUR
-- **lego** - generates templates of commands for lego, to simplify process of obtaining certificates
+
+📃 Available licenses:
+
+- **license-gpl** - GNU General Public License is a series of widely used free software licenses that guarantee end users the four freedoms to run, study, share, and modify the software
+- **license-mit** - permissive free software license originating at the Massachusetts Institute of Technology
+- **license-apache** - permissive free software license written by the Apache Software Foundation
 
 🐳 Compose file options:
 

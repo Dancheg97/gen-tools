@@ -24,7 +24,6 @@ var (
 	pass   string
 	gitea  string
 	logo   string
-	gen    bool
 )
 
 func init() {
@@ -40,7 +39,6 @@ func Gen(cmd *cobra.Command, args []string) {
 	user = viper.GetString(`user`)
 	pass = viper.GetString(`pass`)
 	gitea = viper.GetString(`gitea`)
-	gen = viper.GetBool(`generate`)
 	logo = viper.GetString(`logo`)
 
 	for _, arg := range args {
@@ -87,11 +85,11 @@ func processArguement(arg string) {
 	case "go-lint":
 		tools.GenerateGolangCi()
 	case "go-grpc":
-		tools.GenerateBuf(gen)
+		tools.GenerateBuf()
 	case "go-docker":
 		tools.GenerateGoDocker(repo)
 	case "go-sqlc":
-		tools.GenerateSqlc(repo, gen)
+		tools.GenerateSqlc(repo)
 	case "go-redis":
 		tools.GenerateRedis()
 	case "go-nats":

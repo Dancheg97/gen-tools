@@ -7,7 +7,7 @@ import (
 	"dancheg97.ru/dancheg97/gen-tools/utils"
 )
 
-func GenerateSqlc(repo string, generate bool) {
+func GenerateSqlc(repo string) {
 	utils.WriteFile("sqlc.yaml", SqlcYaml)
 	utils.WriteFile("sqlc.sql", SqlcSql)
 	utils.WriteFile("migrations/0001_ini.sql", GooseMigrations)

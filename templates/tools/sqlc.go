@@ -14,9 +14,6 @@ func GenerateSqlc(repo string, generate bool) {
 	utils.WriteFile("postgres/postgres.go", fmt.Sprintf(PostgresGo, repo))
 	utils.AppendToMakefile(SqlcMakefile)
 	utils.AppendToCompose(services.PostgresYml)
-	if generate {
-		utils.SystemCall("sqlc generate")
-	}
 }
 
 const SqlcSql = `-- name: SelectSomething :one

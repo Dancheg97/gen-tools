@@ -11,8 +11,10 @@ func GenerateGoCliTemplate(repo string) {
 	utils.WriteFile("cmd/flags.go", cliFlagsGo)
 	utils.WriteFile("cmd/run.go", cliRunGo)
 	utils.WriteFile("cmd/root.go", cliRootGo)
-	utils.SystemCall("go mod init " + repo)
-	utils.SystemCall("go mod tidy")
+	err := utils.SystemCall("go mod init " + repo)
+	utils.CheckErr(err)
+	err = utils.SystemCall("go mod tidy")
+	utils.CheckErr(err)
 }
 
 const cliMainGo = `package main

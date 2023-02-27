@@ -35,7 +35,8 @@ func Infr(cmd *cobra.Command, args []string) {
 	})
 
 	logrus.Info("Obtaining certificates")
-	utils.SystemCall(`sh certs.sh`)
+	err := utils.SystemCall(`sh certs.sh`)
+	utils.CheckErr(err)
 
 	logrus.Info("Generating gitea/mkdocs logo")
 

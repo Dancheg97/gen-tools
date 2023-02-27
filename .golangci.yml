@@ -233,7 +233,11 @@ issues:
         - noctx
         - wrapcheck
         - errcheck
-    - path: "license.go"
+    - path: "apache.go"
+      linters: [lll]
+    - path: "gpl.go"
+      linters: [lll]
+    - path: "mit.go"
       linters: [lll]
     - path: "golangci.go"
       linters: [lll]

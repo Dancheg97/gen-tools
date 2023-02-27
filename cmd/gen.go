@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"dancheg97.ru/dancheg97/gen-tools/templates"
+	"dancheg97.ru/dancheg97/gen-tools/templates/licenses"
 	"dancheg97.ru/dancheg97/gen-tools/templates/services"
 	"dancheg97.ru/dancheg97/gen-tools/templates/tools"
 	"dancheg97.ru/dancheg97/gen-tools/utils"
@@ -54,10 +55,12 @@ func processArguement(arg string) {
 		templates.GenerateDroneYml(gitea)
 	case "make":
 		utils.WriteFile("Makefile", templates.Makefile)
-	case "gpl":
-		utils.WriteFile("LICENSE", templates.LicenseGPLv3)
-	case "mit":
-		utils.WriteFile("LICENSE", templates.LicenseMIT)
+	case "license-gpl":
+		utils.WriteFile("LICENSE", licenses.GPLv3)
+	case "license-mit":
+		utils.WriteFile("LICENSE", licenses.MIT)
+	case "license-apache":
+		utils.WriteFile("LICENSE", licenses.Apache)
 	case "pkgbuild":
 		utils.WriteFile("PKGBUILD", templates.Pkgbuild)
 	case "compose-gitea":

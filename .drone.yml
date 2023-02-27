@@ -12,10 +12,9 @@ volumes:
       path: /var/run/docker.sock
 
 steps:
-  - name: check gofumpt, lint and test
-    image: dancheg97.ru/dancheg97/gen-tools:latest
-    commands:
-      - if [[ $(gofumpt -d . | wc -c) -ne 0 ]]; then exit 1; fi 
+  - name: lint and test
+    image: golangci/golangci-lint
+    commands: 
       - golangci-lint run
       - go test ./...
 

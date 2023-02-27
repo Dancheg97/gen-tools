@@ -12,13 +12,26 @@ volumes:
       path: /var/run/docker.sock
 
 steps:
-  - name: lint, test and build
+  - name: check gofumpt, lint and test
     image: dancheg97.ru/dancheg97/gen-tools:latest
     commands:
       - if [[ $(gofumpt -d . | wc -c) -ne 0 ]]; then exit 1; fi 
       - golangci-lint run
       - go test ./...
-      - go build
+
+  - name: dockerize, build and push to registry
+    image: docker
+    environment:
+      PASS:
+        from_secret: PASS
+    volumes:
+      - name: docker
+        path: /var/run/docker.sock
+    commands:
+      - docker build -t dancheg97.ru/$DRONE_REPO:latest -t dancheg97.ru/$DRONE_REPO:$(date +"%m-%d-%y") .
+      - docker login -u dancheg97 -p $PASS dancheg97.ru
+      - docker push dancheg97.ru/$DRONE_REPO:latest
+      - docker push dancheg97.ru/$DRONE_REPO:$(date +"%m-%d-%y")
 
   - name: github mirror push
     image: appleboy/drone-git-push

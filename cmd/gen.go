@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"dancheg97.ru/dancheg97/gen-tools/templates"
+	"dancheg97.ru/dancheg97/gen-tools/templates/golang"
 	"dancheg97.ru/dancheg97/gen-tools/templates/licenses"
 	"dancheg97.ru/dancheg97/gen-tools/templates/services"
-	"dancheg97.ru/dancheg97/gen-tools/templates/tools"
 	"dancheg97.ru/dancheg97/gen-tools/utils"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
@@ -84,19 +84,19 @@ func processArguement(arg string) {
 	case "compose-dozzle":
 		services.GenerateDozzle(mail, domain, user, pass)
 	case "go-lint":
-		tools.GenerateGolangCi()
+		golang.GenerateGolangCi()
 	case "go-grpc":
-		tools.GenerateBuf()
+		golang.GenerateBuf()
 	case "go-docker":
-		tools.GenerateGoDocker(repo)
+		golang.GenerateGoDocker(repo)
 	case "go-sqlc":
-		tools.GenerateSqlc(repo)
+		golang.GenerateSqlc(repo)
 	case "go-redis":
-		tools.GenerateRedis()
+		golang.GenerateRedis()
 	case "go-nats":
-		tools.GenerateNats(repo)
+		golang.GenerateNats(repo)
 	case "go-cli":
-		tools.GenerateGoCliTemplate(repo)
+		golang.GenerateGoCliTemplate(repo)
 	default:
 		logrus.Error("unknown arguement: ", arg)
 	}

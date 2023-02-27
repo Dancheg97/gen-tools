@@ -7,7 +7,6 @@
 [![Generic badge](https://img.shields.io/badge/LICENSE-GPLv3-orange.svg)](https://dancheg97.ru/dancheg97/gen-tools/src/branch/main/LICENSE)
 [![Generic badge](https://img.shields.io/badge/GITEA-REPO-red.svg)](https://dancheg97.ru/dancheg97/gen-tools)
 [![Generic badge](https://img.shields.io/badge/GITHUB-REPO-white.svg)](https://github.com/dancheg97/gen-tools)
-[![Generic badge](https://img.shields.io/badge/DOCKER-REGISTRY-blue.svg)](https://dancheg97.ru/dancheg97/-/packages/container/gen-tools/latest)
 [![Generic badge](https://img.shields.io/badge/AUR-REPO-cyan.svg)](https://aur.archlinux.org/packages/gen-tools)
 [![Build Status](https://drone.dancheg97.ru/api/badges/dancheg97/gen-tools/status.svg)](https://drone.dancheg97.ru/dancheg97/gen-tools)
 
@@ -86,66 +85,10 @@ yay -Sy gen-tools
 
 ### Examples:
 
-```
-gen-tools gen drone gpl
-```
+```sh
+gen-tools gen readme license-gpl
 
-```
 gen-tools go --repo myrepo.com/me/tool
-```
 
-```
 gen-tools infr --name Nice --domain nice.org --user admin --pass SeCReT --email he@he.org
-```
-
-```
-gen-tools infr --name Nice --domain nice.org --user admin --pass SeCReT --email he@he.org
-```
-
-- [gen-tools](README.md) - tool for generating go project templates
-
-```sh
-docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest gen-tools --help
-```
-
-- [gofumpt](https://github.com/mvdan/gofumpt) - tool for formatting go code
-
-```sh
-docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest gofumpt --help
-```
-
-- [golanglint-ci](https://golangci-lint.run/) - tool for linting go code
-
-```sh
-docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest golanglint-ci --help
-```
-
-- [buf](https://docs.buf.build/introduction) - tool for helping with protocol buffers and gRPC
-
-```sh
-docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest buf --help
-```
-
-- [sqlc](https://docs.sqlc.dev/en/stable) - tool for generating type-safe go code from sql queries
-
-```sh
-docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest sqlc --help
-```
-
-- [swag](https://github.com/swaggo/swag) - tool for generating `swagger.yaml` from code annotations.
-
-```sh
-docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest swag --help
-```
-
-- [lego](https://github.com/go-acme/lego) - tool for obtaining sertificates from ACME.
-
-```sh
-docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest lego --help
-```
-
-- [goose](https://github.com/pressly/goose) - tool for migrating database (eg postgres).
-
-```sh
-docker run --rm -it -v $(pwd):/wd -w /wd dancheg97.ru/dancheg97/gen-tools:latest goose --help
 ```

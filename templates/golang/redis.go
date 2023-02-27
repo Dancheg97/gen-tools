@@ -1,4 +1,4 @@
-package tools
+package golang
 
 import (
 	"dancheg97.ru/dancheg97/gen-tools/templates/services"

@@ -8,6 +8,7 @@
 [![Generic badge](https://img.shields.io/badge/GITEA-REPO-red.svg)](https://dancheg97.ru/dancheg97/gen-tools)
 [![Generic badge](https://img.shields.io/badge/GITHUB-REPO-white.svg)](https://github.com/dancheg97/gen-tools)
 [![Generic badge](https://img.shields.io/badge/AUR-REPO-cyan.svg)](https://aur.archlinux.org/packages/gen-tools)
+[![Generic badge](https://img.shields.io/badge/DOCKER-REGISTRY-blue.svg)](https://dancheg97.ru/dancheg97/-/packages/container/gen-tools/latest)
 [![Build Status](https://drone.dancheg97.ru/api/badges/dancheg97/gen-tools/status.svg)](https://drone.dancheg97.ru/dancheg97/gen-tools)
 
 CLI Tool for generating different project modules for templating complex systems

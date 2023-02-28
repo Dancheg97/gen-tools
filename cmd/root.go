@@ -89,6 +89,7 @@ var flags = []Flag{
 	{
 		Cmd:         rootCmd,
 		Name:        "logo",
+		ShortName:   "L",
 		Env:         "LOGO",
 		Description: "🔖 path for .svg logo, will be used in gitea and mkdocs",
 	},

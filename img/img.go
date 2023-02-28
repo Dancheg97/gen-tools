@@ -1,8 +1,11 @@
-package svg
+package img
 
 import (
 	"fmt"
 	"image"
+	"image/color"
+	"image/draw"
+	"image/jpeg"
 	"image/png"
 	"os"
 	"strings"
@@ -14,24 +17,45 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func SvgToPng(inp, outp string, w, h int) {
+func PngToJpeg(in, out string, size int) {
+	pngImgFile, err := os.Open(in)
+	utils.CheckErr(err)
+
+	imgSrc, err := png.Decode(pngImgFile)
+	utils.CheckErr(err)
+
+	newImg := image.NewRGBA(imgSrc.Bounds())
+	draw.Draw(newImg, newImg.Bounds(), &image.Uniform{color.White}, image.Point{}, draw.Src)
+	draw.Draw(newImg, newImg.Bounds(), imgSrc, imgSrc.Bounds().Min, draw.Over)
+
+	jpgImgFile, err := os.Create(out)
+	utils.CheckErr(err)
+
+	var opt jpeg.Options
+	opt.Quality = size
+	err = jpeg.Encode(jpgImgFile, newImg, &opt)
+	utils.CheckErr(err)
+}
+
+func SvgToPng(inp, out string, size int) {
 	in, err := os.Open(inp)
 	utils.CheckErr(err)
 
 	icon, err := oksvg.ReadIconStream(in)
 	utils.CheckErr(err)
-	icon.SetTarget(0, 0, float64(w), float64(h))
-	rgba := image.NewRGBA(image.Rect(0, 0, w, h))
-	icon.Draw(rasterx.NewDasher(w, h, rasterx.NewScannerGV(w, h, rgba, rgba.Bounds())), 1)
+	icon.SetTarget(0, 0, float64(size), float64(size))
+	rgba := image.NewRGBA(image.Rect(0, 0, size, size))
+	gvscanner := rasterx.NewScannerGV(size, size, rgba, rgba.Bounds())
+	icon.Draw(rasterx.NewDasher(size, size, gvscanner), 1)
 
-	out, err := os.Create(outp)
+	output, err := os.Create(out)
 	utils.CheckErr(err)
 
-	err = png.Encode(out, rgba)
+	err = png.Encode(output, rgba)
 	utils.CheckErr(err)
 }
 
-func ResizeSvg(in, out string, w, h int) {
+func ResizeSvg(in, out string, size int) {
 	inp, err := os.ReadFile(in)
 	utils.CheckErr(err)
 
@@ -42,8 +66,8 @@ func ResizeSvg(in, out string, w, h int) {
 	}
 	second := strings.Split(first[1], `>`)
 
-	second[0] = UpdateArrt(second[0], `width`, fmt.Sprint(w))
-	second[0] = UpdateArrt(second[0], `height`, fmt.Sprint(h))
+	second[0] = UpdateArrt(second[0], `width`, fmt.Sprint(size))
+	second[0] = UpdateArrt(second[0], `height`, fmt.Sprint(size))
 
 	first[1] = strings.Join(second, `>`)
 

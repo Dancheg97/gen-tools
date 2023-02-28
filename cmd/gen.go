@@ -61,27 +61,27 @@ func processArguement(arg string) {
 		utils.WriteFile("LICENSE", licenses.Apache)
 	case "pkgbuild":
 		utils.WriteFile("PKGBUILD", templates.Pkgbuild)
-	case "compose-gitea":
+	case "service-gitea":
 		services.GenerateGitea(mail, domain, logo)
-	case "compose-nginx":
+	case "service-nginx":
 		services.GenerateNginx()
-	case "compose-pacman":
+	case "service-pacman":
 		services.GeneratePacman(mail, domain)
-	case "compose-pocketbase":
+	case "service-pocketbase":
 		services.GeneratePocketbase(mail, domain)
-	case "compose-nats":
+	case "service-nats":
 		services.GenerateNats()
-	case "compose-postgres":
+	case "service-postgres":
 		services.GeneratePostgres(user, pass)
-	case "compose-redis":
+	case "service-redis":
 		services.GenerateRedis()
-	case "compose-drone":
+	case "service-drone":
 		services.GenerateDrone(mail, domain)
-	case "compose-mkdocs":
+	case "service-mkdocs":
 		services.GenerateMkdocs(mail, domain)
-	case "compose-kuma":
+	case "service-kuma":
 		services.GenerateUptimeKuma(mail, domain)
-	case "compose-dozzle":
+	case "service-dozzle":
 		services.GenerateDozzle(mail, domain, user, pass)
 	case "go-lint":
 		golang.GenerateGolangCi()

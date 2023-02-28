@@ -26,12 +26,12 @@ func Infr(cmd *cobra.Command, args []string) {
 	PreventDefault(`pass`, viper.GetString(`pass`), `password`)
 
 	Gen(cmd, []string{
-		"compose-nginx",
-		"compose-gitea",
-		"compose-drone",
-		"compose-mkdocs",
-		"compose-kuma",
-		"compose-dozzle",
+		"service-nginx",
+		"service-gitea",
+		"service-drone",
+		"service-mkdocs",
+		"service-kuma",
+		"service-dozzle",
 	})
 
 	logrus.Info("Obtaining certificates")

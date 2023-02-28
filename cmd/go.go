@@ -21,8 +21,8 @@ func Go(cmd *cobra.Command, args []string) {
 		"go-redis",
 		"go-nats",
 		"go-cli",
-		"compose-redis",
-		"compose-nats",
-		"compose-postgres",
+		"service-redis",
+		"service-nats",
+		"service-postgres",
 	})
 }

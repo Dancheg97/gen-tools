@@ -3,6 +3,7 @@ package services
 import (
 	"fmt"
 
+	"dancheg97.ru/dancheg97/gen-tools/img"
 	"dancheg97.ru/dancheg97/gen-tools/utils"
 	"github.com/sirupsen/logrus"
 )
@@ -22,7 +23,18 @@ func GenerateGiteaLogo(logo string) {
 		logrus.Info(`no gitea logo provided, using default logo`)
 		return
 	}
+	utils.PrepareDir(GiteaImageDir + `.gitkeep`)
+	img.ResizeSvg(logo, GiteaImageDir+`logo.svg`, 32)
+	img.SvgToPng(logo, GiteaImageDir+`logo.png`, 512)
+	img.ResizeSvg(logo, GiteaImageDir+`favicon.svg`, 32)
+	img.SvgToPng(logo, GiteaImageDir+`favicon.png`, 180)
+	img.SvgToPng(logo, GiteaImageDir+`avatar_default.png`, 200)
+	img.SvgToPng(logo, GiteaImageDir+`apple-touch-icon.png`, 180)
+	img.PngToJpeg(GiteaImageDir+`apple-touch-icon.png`, GiteaImageDir+`apple-touch-icon.png`, 180)
+	img.ResizeSvg(logo, GiteaImageDir+`gitea.svg`, 32)
 }
+
+const GiteaImageDir = `gitea/gitea/public/img/`
 
 const GiteaNginx = `
 server {

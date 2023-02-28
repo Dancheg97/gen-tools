@@ -26,6 +26,7 @@ func Infr(cmd *cobra.Command, args []string) {
 	PreventDefault(`pass`, viper.GetString(`pass`), `password`)
 
 	Gen(cmd, []string{
+		"readme",
 		"service-nginx",
 		"service-gitea",
 		"service-drone",

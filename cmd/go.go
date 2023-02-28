@@ -24,5 +24,6 @@ func Go(cmd *cobra.Command, args []string) {
 		"service-redis",
 		"service-nats",
 		"service-postgres",
+		"readme",
 	})
 }

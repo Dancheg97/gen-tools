@@ -29,6 +29,7 @@ gen-tools -h
 
 - **drone** - includes drone.yml template for project CI-CD
 - **pkgbuild** - arch format PKGBUILD for packaging to AUR
+- **readme** - project independent readme template with logo and some badges
 
 📃 Available licenses:
 
@@ -50,7 +51,7 @@ gen-tools -h
 - **service-kuma** - adds kuma, for tracking and visualizing services stability
 - **service-dozzle** - adds dozzle, for for viewing services logs
 
-🐰 Go code options:
+🐭 Go code options:
 
 - **go-cli** - includes cobra and viper
 - **go-lint** - includes golanglint-ci linter for go code

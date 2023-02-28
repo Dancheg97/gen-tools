@@ -51,6 +51,8 @@ func Gen(cmd *cobra.Command, args []string) {
 
 func processArguement(arg string) {
 	switch arg {
+	case "readme":
+		utils.WriteFile(`README.md`, templates.Readme)
 	case "drone":
 		templates.GenerateDroneYml(gitea)
 	case "license-gpl":

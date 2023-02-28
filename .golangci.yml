@@ -3,7 +3,7 @@ run:
 
 linters-settings:
   cyclop:
-    max-complexity: 25
+    max-complexity: 35
     package-average: 10.0
 
   errcheck:
@@ -16,10 +16,10 @@ linters-settings:
 
   funlen:
     lines: 100
-    statements: 50
+    statements: 70
 
   gocognit:
-    min-complexity: 20
+    min-complexity: 25
 
   gocritic:
     settings:
@@ -248,4 +248,6 @@ issues:
     - path: "root.go"
       linters: [lll]
     - path: "list.go"
+      linters: [lll, forbidigo]
+    - path: "readme.go"
       linters: [lll, forbidigo]

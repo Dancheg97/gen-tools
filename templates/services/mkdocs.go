@@ -3,17 +3,28 @@ package services
 import (
 	"fmt"
 
+	"dancheg97.ru/dancheg97/gen-tools/img"
 	"dancheg97.ru/dancheg97/gen-tools/utils"
 )
 
-func GenerateMkdocs(mail string, domain string) {
+func GenerateMkdocs(mail string, domain string, logo string) {
 	utils.AppendToCompose(MkDocsCompose)
 	utils.WriteFile(`mkdocs/mkdocs.yml`, MkDocsConfigYaml)
 	utils.WriteFile(`mkdocs/docs/index.md`, MkDocsPageExample)
 	utils.WriteFile(`mkdocs/docs/stylesheets/extra.css`, MkDocsCss)
 	utils.AppendToNginx(fmt.Sprintf(MkDocsNginx, domain, domain, domain))
 	utils.AppendToCerts(mail, "docs."+domain)
+	if logo != `` {
+		GenerateMkdocsLogo(logo)
+	}
 }
+
+func GenerateMkdocsLogo(logo string) {
+	utils.PrepareDir(MkDocsAssetsDir + `.gitkeep`)
+	img.SvgToPng(logo, MkDocsAssetsDir+`logo.png`, 32)
+}
+
+const MkDocsAssetsDir = `mkdocs/assets/`
 
 const MkDocsPageExample = `# Page name example
 
@@ -52,8 +63,8 @@ server {
 
 const MkDocsConfigYaml = `site_name: Example name
 
-repo_url: https://gitrepo.com/example
-repo_name: RepoName
+repo_url: %s
+repo_name: %s
 
 theme:
   name: material

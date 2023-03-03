@@ -35,7 +35,7 @@ steps:
   - name: github mirror push
     image: appleboy/drone-git-push
     settings:
-      branch: master
+      branch: main
       remote: ssh://git@github.com/dancheg97/gen-tools.git
       force: false
       commit: true

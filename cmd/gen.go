@@ -80,7 +80,7 @@ func processArguement(arg string) {
 	case "service-drone":
 		services.GenerateDrone(mail, domain)
 	case "service-mkdocs":
-		services.GenerateMkdocs(mail, domain)
+		services.GenerateMkdocs(mail, domain, logo)
 	case "service-kuma":
 		services.GenerateUptimeKuma(mail, domain)
 	case "service-dozzle":

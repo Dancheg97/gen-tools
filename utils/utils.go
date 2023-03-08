@@ -74,7 +74,7 @@ func SystemCall(cmd string) error {
 	commad.Stderr = logrus.StandardLogger().Writer()
 	err := commad.Run()
 	if err != nil {
-		logrus.Error(`unable to execute system call: `, cmd, err)
+		logrus.Errorf(`unable to execute system call: %s %w`, cmd, err)
 		return err
 	}
 	logrus.Info(`executed system call successfully`)
